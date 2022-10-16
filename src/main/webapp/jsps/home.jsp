@@ -27,7 +27,7 @@
 				+1 (313) 413-1477,
 				fusisoft@gmail.com
 				<br>
-				<a href="mailto:fusisoft@gmail.com">Mail to Fusisoft Technologies</a>
+				<a href="mailto:fusisoft@gmail.com">Send Mail to Fusisoft Technologies</a>
 			</span>
 		</div>
 		<hr>

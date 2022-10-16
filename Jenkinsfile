@@ -3,9 +3,10 @@ agent any
     stages {
       stage('1. git clone'){
         when {
-            expression
+            expression {
               BRANCH_NAME == 'main'
-        }
+            }
+          }
         steps{
         git url: 'https://github.com/ndiforfusi/fusisoft-maven-project.git'
        }

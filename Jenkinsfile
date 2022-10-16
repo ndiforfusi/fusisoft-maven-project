@@ -2,7 +2,8 @@ pipeline {
 agent any
 tools {
     maven 'maven-3.8.6'
-   }
+    }
+    stages {
       stage('1. Build') { 
         steps{
           sh "mvn clean package"
@@ -21,6 +22,7 @@ tools {
          +1 (313) 413-1477''', cc: 'fusisoft@gmail.com', from: '', replyTo: '', subject: 'Build is over!!', to: 'fusisoft@gmail.com'
       }
     }
+ }
 }
 
 

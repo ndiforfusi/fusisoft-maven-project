@@ -1,8 +1,6 @@
 node
 {
 def maveHome = tool name: "maven3.6.8"
-    # new feature
-    
     stage('1. git clone')
     {
        git url: 'https://github.com/ndiforfusi/fusisoft-maven-project.git'

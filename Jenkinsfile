@@ -2,13 +2,14 @@ pipeline {
 agent any
     stages {
       stage('1. git clone'){
-        when {
-            expression {
-              BRANCH_NAME == 'main'
-            }
+        //when {
+        //    expression {
+         //     BRANCH_NAME == 'main'
+          //  }
           }
         steps{
-        git url: 'https://github.com/ndiforfusi/fusisoft-maven-project.git'
+          sh "echo 'Building packages'"
+        //git url: 'https://github.com/ndiforfusi/fusisoft-maven-project.git'
        }
       }
       stage('2. Build') { 

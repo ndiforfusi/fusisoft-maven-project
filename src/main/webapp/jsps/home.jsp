@@ -35,7 +35,7 @@
 		<hr>
 		<hr>
 		<p align=center>Fusisoft Technologies, Training, Development Center.</p>
-		<p align=center><small>Copyrights 2022 by <a href="fusisoft.com">Fusisoft IT Technologies</a> </small></p>
+		<p align=center><small>Copyrights 2022 by <a href="fusisoft.com">Fusisoft Technologies</a> </small></p>
 
 	</body>
 

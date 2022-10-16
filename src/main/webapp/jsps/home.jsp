@@ -13,30 +13,31 @@
 	<body>
 		<h1 align="center">Fusisoft Technology - Leaders in Software Delivery and DevOps Automation Engineering</h1>
 		<h1 align="center">Thank you for your interest in our business</h1 <h1 align="center">
-		<h2 Welcome to Fusisoft Technology where we offer world class support and consultancy for all your DevOps and
-			Cloud Infrastructures needs.>/h1 <h1 align="center"></h1>
-			<h1 align="center">We seek to set the pace in DevOps best practices and technologies
-		</h2>
-		<hr>
-		<div style="text-align: center;">
-			<span>
-				<img src="images/LT.JPG" alt="" width="350">
-			</span>
-			<span style="font-weight: bold;">
-				Fusisoft Technology,
-				11111 Katy Freeway, suite 910
-				+1 (313) 413-1477,
-				fusisoft@gmail.com
-				<br>
-				<a href="mailto:fusisoft@gmail.com">Send Mail to Fusisoft Technologies</a>
-			</span>
-		</div>
-		<hr>
-		<p> Service : <a href="services/employee/getEmployeeDetails">Get Employee Details </p>
-		<hr>
-		<hr>
-		<p align=center>Fusisoft Technology, Training, Development Center.</p>
-		<p align=center><small>Copyrights 2022 by <a href="fusisoft.com">Fusisoft Technologies</a> </small></p>
+		<h2 align="center">Welcome to Fusisoft Technology where we offer world class support and consultancy for all
+			your DevOps and
+			Cloud Infrastructures needs.</h2>
+		<h1 align="center">We seek to set the pace in DevOps best practices and technologies
+			</h2>
+			<hr>
+			<div style="text-align: center;">
+				<span>
+					<img src="images/LT.JPG" alt="" width="350">
+				</span>
+				<span style="font-weight: bold;">
+					Fusisoft Technology,
+					11111 Katy Freeway, suite 910
+					+1 (313) 413-1477,
+					fusisoft@gmail.com
+					<br>
+					<a href="mailto:fusisoft@gmail.com">Send Mail to Fusisoft Technologies</a>
+				</span>
+			</div>
+			<hr>
+			<p> Service : <a href="services/employee/getEmployeeDetails">Get Employee Details </p>
+			<hr>
+			<hr>
+			<p align=center>Fusisoft Technology, Training, Development Center.</p>
+			<p align=center><small>Copyrights 2022 by <a href="fusisoft.com">Fusisoft Technologies</a> </small></p>
 
 	</body>
 

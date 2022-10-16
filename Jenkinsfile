@@ -16,7 +16,8 @@ def maveHome = tool name: "maven3.6.8"
     }
     stage('3. Deploy')
     {
-         sh "${mavenHome}/bin/mvn deploy"
+         sh "docker build -t fusisoft-webapps:1.1.0 .;docker run -itd --name=fusisoft-webapps -p 8085:8080 fusisoft-webapps:1.1.0"
+        
     }
     stage ('4. Email Notification')
     {

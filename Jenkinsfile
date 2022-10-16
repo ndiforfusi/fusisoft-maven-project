@@ -1,35 +1,29 @@
 node
 {
-def mavenHome = tool name: "maven3.6.3"
+def maveHome = tool name: "maven3.6.8"
     # new feature
     
-    stage("1. git clone")
+    stage('1. git clone')
     {
-       git url: 'https://github.com/LandmakTechnology/maven-web-app.git'
+       git url: 'https://github.com/ndiforfusi/fusisoft-maven-project.git'
     }
     
-    stage("2. Build")
+    stage('2. Build')
     {
         sh "${mavenHome}/bin/mvn clean package"
 
         // bat "mvn clean package"  - for winows OS
     }
-    stage('3. Sonar')
+    stage('3. Deploy')
     {
-         //sh "${mavenHome}/bin/mvn sonar:sonar"
+         sh "${mavenHome}/bin/mvn deploy"
     }
-    stage('4. Nexus')
-     {
-        // sh "${mavenHome}/bin/mvn deploy"
-    }
-    stage('5. Deploy')
+    stage ('4. Email Notification')
     {
-       //sh "scp -o StrictHostKeyChecking=no target/maven-web-app ec2-user@34.204.166.28:/opt/apache-tomcat-9.0.37/webapps/"
-        
-    }
-    stage('6. Email notification')
-    {
-        //
+     mail bcc: 'fusisoft@gmail.com', body: '''Build is Over
+     Thanks,
+     Fusisoft Technologies,
+    +1 (313) 413-1477''', cc: 'fusisoft@gmail.com', from: '', replyTo: '', subject: 'Build is over!!', to: 'fusisoft@gmail.com'
     }
 }
 

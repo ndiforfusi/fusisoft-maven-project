@@ -12,11 +12,11 @@
 
 	<body>
 		<h1 align="center">Fusisoft Technology - Leaders in Software Delivery and DevOps Automation Engineering</h1>
-		<h1 align="center">Thank you for your interest in our business</h1 <h1 align="center"> Welcome
-		to Fusisoft Technology where we offer world class support and consultancy for all your DevOps and Cloud
-		Infrastructures needs.
-		</h1>
-		<h1 align="center">We seek to set the pace in DevOps best practices and technologies</h1>
+		<h1 align="center">Thank you for your interest in our business</h1 <h1 align="center">
+		<h2 Welcome to Fusisoft Technology where we offer world class support and consultancy for all your DevOps and
+			Cloud Infrastructures needs.>/h1 <h1 align="center"></h1>
+			<h1 align="center">We seek to set the pace in DevOps best practices and technologies
+		</h2>
 		<hr>
 		<div style="text-align: center;">
 			<span>

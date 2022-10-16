@@ -4,18 +4,18 @@
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Fusisoft.Tech- Home Page</title>
+		<title>We Love Fusisoft Technologies- Home Page</title>
 		<link href="images/LT.JPG" rel="icon">
 	</head>
 	</head>
 
 	<body>
 		<h1 align="center">Fusisoft Technology - Leaders in Software Delivery and DevOps Automation Engineering</h1>
-		<h1 align="center">Prof. Fusi is a genius, thank you for the excellent content</h1 <h1 align="center"> Welcome
-		to fusisoft Technology.Asasoft Technology is a an ideal online training platform for DevOps and Cloud
-		Infrastructures.
+		<h1 align="center">Thank you for your interest in our business</h1 <h1 align="center"> Welcome
+		to Fusisoft Technologies where we offer world class support and consultancy for all your DevOps and Cloud
+		Infrastructures needs.
 		</h1>
-		<h1 align="center">JESUS IS LORD of All FOREVER AND EVER</h1>
+		<h1 align="center">We seek to set the pace in DevOps best practices and technologies</h1>
 		<hr>
 		<div style="text-align: center;">
 			<span>
@@ -27,7 +27,7 @@
 				+1 (313) 413-1477,
 				fusisoft@gmail.com
 				<br>
-				<a href="mailto:fusisoft@gmail.com">Mail to Fusisoft IT Consultancy</a>
+				<a href="mailto:fusisoft@gmail.com">Mail to Fusisoft Technologies</a>
 			</span>
 		</div>
 		<hr>

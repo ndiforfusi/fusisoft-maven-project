@@ -34,7 +34,7 @@
 		<p> Service : <a href="services/employee/getEmployeeDetails">Get Employee Details </p>
 		<hr>
 		<hr>
-		<p align=center>Fusisoft IT Consultancy, Training, Development Center.</p>
+		<p align=center>Fusisoft Technologies, Training, Development Center.</p>
 		<p align=center><small>Copyrights 2022 by <a href="fusisoft.com">Fusisoft IT Technologies</a> </small></p>
 
 	</body>

@@ -1,6 +1,5 @@
 pipeline {
 agent any
-def maveHome = tool name: "maven3.8.6"
     stages {
       stage('1. git clone'){
         when {
@@ -13,7 +12,7 @@ def maveHome = tool name: "maven3.8.6"
       }
     stage('2. Build') { 
       steps{
-        sh "${mavenHome}/bin/mvn clean package"
+        sh "mvn clean package"
          }
        }
     stage('3. Deploy') {

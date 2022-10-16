@@ -5,6 +5,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>We Love Fusisoft Technologies- Home Page</title>
+		<title>We strive for excellence in service delidery</title>
 		<link href="images/LT.JPG" rel="icon">
 	</head>
 	</head>

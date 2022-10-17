@@ -21,7 +21,7 @@
 			<hr>
 			<div style="text-align: center;">
 				<span>
-					<img src="images/LT.JPG" alt="" width="350">
+					<img src="images/asasoft_logo.png" alt="" width="350">
 				</span>
 				<span style="font-weight: bold;">
 					Fusisoft Technology,

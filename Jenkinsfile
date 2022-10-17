@@ -17,9 +17,10 @@ tools {
       stage ('3. Email Notification') {
          steps{
          mail bcc: 'fusisoft@gmail.com', body: '''Build is Over
+         Check the website URL for latest changes
          Thanks,
          Fusisoft Technology,
-         +1 (313) 413-1477''', cc: 'fusisoft@gmail.com', from: '', replyTo: '', subject: 'Build is over!!', to: 'fusisoft@gmail.com'
+         +1 (313) 413-1477''', cc: 'fusisoft@gmail.com', from: '', replyTo: '', subject: 'Application was successfully deployed!!', to: 'fusisoft@gmail.com'
       }
     }
  }

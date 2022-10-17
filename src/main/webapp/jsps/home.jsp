@@ -6,14 +6,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>We Love Fusisoft Technology- Home Page</title>
 		<title>We strive for excellence in service delivery</title>
-		<link href="images/LT.JPG" rel="icon">
+		<link href="images/asasoft_logo.png" rel="icon">
 	</head>
 	</head>
 
 	<body>
-		<h1 align="center">Fusisoft Technology - Leaders in Software Delivery and DevOps Automation Engineering</h1>
+		<h1 align="center">Fusisoft Technologies - Leaders in Software Delivery and DevOps Automation Engineering</h1>
 		<h1 align="center">Thank you for your interest in our business</h1 <h1 align="center">
-		<h2 align="center">Welcome to Fusisoft Technology where we offer world class support and consultancy for all
+		<h2 align="center">Welcome to Fusisoft Technologies where we offer world class support and consultancy for all
 			your DevOps and
 			Cloud Infrastructures needs.</h2>
 		<h1 align="center">We seek to set the pace in DevOps best practices and technologies
@@ -36,7 +36,7 @@
 			<p> Service : <a href="services/employee/getEmployeeDetails">Get Employee Details </p>
 			<hr>
 			<hr>
-			<p align=center>Fusisoft Technology, Training, Development Center.</p>
+			<p align=center>Fusisoft Technologies,an IT consulting and Development Center.</p>
 			<p align=center><small>Copyrights 2022 by <a href="fusisoft.com">Fusisoft Technologies</a> </small></p>
 
 	</body>

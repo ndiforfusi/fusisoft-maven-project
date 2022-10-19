@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>We Love Fusisoft Technology- Home Page</title>
 		<title>We strive for excellence in service delivery</title>
-		<link href="images/asasoft_logo.png" rel="icon">
+		<link href="images/Logo-principal.jpg" rel="icon">
 	</head>
 	</head>
 
@@ -21,7 +21,7 @@
 			<hr>
 			<div style="text-align: center;">
 				<span>
-					<img src="images/asasoft_logo.png" alt="" width="350">
+					<img src="images/Logo-principal.jpg" alt="" width="350">
 				</span>
 				<span style="font-weight: bold;">
 					Fusisoft Technology,

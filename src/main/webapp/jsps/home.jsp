@@ -24,7 +24,7 @@
 					<img src="images/Logo-principal.jpg" alt="" width="350">
 				</span>
 				<span style="font-weight: bold;">
-					Fusisoft Technology,
+					Fusisoft Technologies,
 					11111 Katy Freeway, suite 910
 					+1 (313) 413-1477,
 					fusisoft@gmail.com

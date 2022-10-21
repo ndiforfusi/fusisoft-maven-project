@@ -4,12 +4,12 @@
 	<link href="images/symbol_logo.jpg" rel="icon">
 	<div style="text-align: right;">
 		<span>
-			<img src="images/symbol_logo.jpg" alt="" width="200">
+			<img src="images/symbol_logo.jpg" alt="" width="100">
 		</span>
 
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			<title>We Love Fusisoft Technology- Home Page</title>
+			<title>We Love Fusisoft Technologies- Home Page</title>
 			<title>We strive for excellence in service delivery</title>
 			<link href="images/Logo-principal.jpg" rel="icon">
 		</head>

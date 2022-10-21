@@ -11,6 +11,7 @@
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 			<title>We Love Fusisoft Technologies- Home Page</title>
 			<title>We strive for excellence in service delivery</title>
+			<title>We also sell network devices and appliances accross the globe</title>
 			<link href="images/Logo-principal.jpg" rel="icon">
 		</head>
 		</head>

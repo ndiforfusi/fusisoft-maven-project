@@ -21,8 +21,10 @@ tools {
        }
       stage ('4. Email Notification') {
          steps{
-         mail bcc: 'fusisoft@gmail.com', body: '''Build is Over. check application on; http://
-         Check the website URL for latest changes
+         mail bcc: 'fusisoft@gmail.com', body: '''Build is Over. check application on. 
+         http://3.143.231.151:8085/myapps/
+         Check the website URL for latest changes.
+         Let me know if the changes look okay.
          Thanks,
          Fusisoft Technologies,
          +1 (313) 413-1477''', cc: 'fusisoft@gmail.com', from: '', replyTo: '', subject: 'Application was Successfully Deployed!!', to: 'fusisoft@gmail.com'

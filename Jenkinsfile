@@ -16,7 +16,9 @@ tools {
         // If you have configured more than one global server connection, you can specify its name
 //      sh "${scannerHome}/bin/sonar-scanner"
         sh "mvn sonar:sonar"
-    }
+        }
+        }
+       }
       stage('3. Deploy to a Docker container') {
          steps{
           sh "docker stop fusisoft-webapps;docker rm fusisoft-webapps;docker rmi fusisoft-webapps:1.1.0;docker build -t fusisoft-webapps:1.1.0 .;docker run -itd --name=fusisoft-webapps -p 8085:8080 fusisoft-webapps:1.1.0"

@@ -24,7 +24,7 @@
 				all
 				your DevOps and
 				Cloud Infrastructures needs.</h2>
-			<h1 align="center">We seek to set the pace in DevOps best practices and technologies
+			<h1 align="center">We seek to provide all your IT Infrastructural needs
 				</h2>
 				<hr>
 				<div style="text-align: center;">

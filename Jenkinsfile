@@ -18,6 +18,7 @@ tools {
         sh "mvn sonar:sonar"
         }
         }
+        }
       stage('3. Docker build image') {
          steps{
           sh "docker build -t webapp Dockerfile"

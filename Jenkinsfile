@@ -19,11 +19,12 @@ tools {
         }
         }
         }
-      stage('3. Docker build image') {
+      stage('3. Docker image build') {
          steps{
-          sh "docker build -t webapp Dockerfile"
-          sh "docker tag webapp ndiforfusi/webapp:1.0.0"
-          sh "docker push ndiforfusi/webapp:1.0.0"
+          sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 322266404742.dkr.ecr.us-west-2.amazonaws.com"
+          sh "docker build -t webapp ."
+          sh "docker tag webapp:latest 322266404742.dkr.ecr.us-west-2.amazonaws.com/webapp:1.0.0"
+          sh "docker push 322266404742.dkr.ecr.us-west-2.amazonaws.com/webapp:1.0.0"
          }
        }
       stage('4. Deployment into kubernetes cluster') {

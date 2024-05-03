@@ -1,7 +1,7 @@
 pipeline {
-agent any
+ agent { node { label "maven-sonar-node" } } 
 tools {
-    maven 'maven3.8.6'
+    maven 'maven3.9.6'
     }
     stages {
       stage('1. Build with maven') { 
@@ -18,13 +18,20 @@ tools {
         sh "mvn sonar:sonar"
         }
         }
-       }
-      stage('3. Deploy to a Docker container') {
+      stage('3. Docker build image') {
          steps{
-          sh "docker stop fusisoft-webapps;docker rm fusisoft-webapps;docker rmi fusisoft-webapps:1.1.0;docker build -t fusisoft-webapps:1.1.0 .;docker run -itd --name=fusisoft-webapps -p 8085:8080 fusisoft-webapps:1.1.0"
+          sh "docker build -t webapp Dockerfile"
+          sh "docker tag webapp ndiforfusi/webapp:1.0.0"
+          sh "docker push ndiforfusi/webapp:1.0.0"
          }
        }
-      stage ('4. Email Notification') {
+      stage('4. Deployment into kubernetes cluster') {
+         steps{
+          sh "kubectl kustomize manifest/kustomization.yaml"
+         }
+       }
+
+      stage ('. Email Notification') {
          steps{
          mail bcc: 'fusisoft@gmail.com', body: '''Build is Over. check application on. 
          http://3.143.231.151:8085/myapps/

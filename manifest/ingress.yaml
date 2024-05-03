@@ -1,33 +1,12 @@
-# Complete Manifest Where in single yml we defined Deployment & Service for SpringApp & PVC(with default  StorageClass),ReplicaSet & Service For Mongo.
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: webapp deployment
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: webapp
-  template:
-    metadata:
-      name: webapp
-      labels:
-        app: webapp
-    spec:
-      containers:
-        - name: webapp_contianer
-          image: ndiforfusi/webapp:1.0.0
-          ports:
-            - containerPort: 8080
-
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: echoserver-ip
-  namespace: echoserver
+  name: webapp-ingress
+  namespace: gateway
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:322266404742:certificate/a1027753-3cdb-4841-af8b-4f1a3266d97f
+    alb.ingress.kubernetes.io/subnets:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/load-balancer-name: webapp-server-ip
     alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=30

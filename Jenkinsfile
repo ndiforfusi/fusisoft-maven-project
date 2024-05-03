@@ -1,7 +1,7 @@
 pipeline {
  agent { node { label "maven-sonar-node" } } 
 tools {
-    maven 'maven3.9.6'
+    maven "maven3.9.6"
     }
     stages {
       stage('1. Build with maven') { 

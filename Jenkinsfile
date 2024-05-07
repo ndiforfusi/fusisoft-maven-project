@@ -14,16 +14,23 @@ tools {
          }
        }
       stage('2. SonarQube analysis') {
-//    def scannerHome = tool 'SonarScanner 4.0';
+      def scannerHome = tool 'sonar-integration';
         steps{
-        withSonarQubeEnv('sonarqube-8.9.10') { 
+        withSonarQubeEnv('sonar-integration') { 
         // If you have configured more than one global server connection, you can specify its name
 //      sh "${scannerHome}/bin/sonar-scanner"
         sh "mvn sonar:sonar"
         }
         }
         }
-      stage('3. Docker image build') {
+      stage("3. Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+      stage('4. Docker image build') {
          steps{
           sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 322266404742.dkr.ecr.us-west-2.amazonaws.com"
           sh "docker build -t webapp ."
@@ -31,7 +38,7 @@ tools {
           sh "docker push ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
          }
        }
-      stage('4. Deployment into kubernetes cluster') {
+      stage('5. Deployment into kubernetes cluster') {
          steps{
           sh "kubectl kustomize manifest/kustomization.yaml"
          }

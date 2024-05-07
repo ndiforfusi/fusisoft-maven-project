@@ -1,5 +1,9 @@
 pipeline {
- agent { node { label "maven-sonar-node" } } 
+ agent { node { label "maven-sonar-node" } }
+ parameters   {
+   string(name: 'aws_account', defaultValue: '322266404742', description: 'aws account hosting image registry')
+   string(name: 'ecr_tag', defaultValue: '1.0.0', description: 'aws ecr image tag')
+       }
 tools {
     maven "Maven-3.9.6"
     }
@@ -23,8 +27,8 @@ tools {
          steps{
           sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 322266404742.dkr.ecr.us-west-2.amazonaws.com"
           sh "docker build -t webapp ."
-          sh "docker tag webapp:latest 322266404742.dkr.ecr.us-west-2.amazonaws.com/webapp:1.0.0"
-          sh "docker push 322266404742.dkr.ecr.us-west-2.amazonaws.com/webapp:1.0.0"
+          sh "docker tag webapp:latest ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
+          sh "docker push ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
          }
        }
       stage('4. Deployment into kubernetes cluster') {

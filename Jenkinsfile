@@ -14,7 +14,7 @@ tools {
          }
        }
       stage('2. SonarQube analysis') {
-      def scannerHome = tool 'sonar-integration';
+ //     def scannerHome = tool 'sonar-integration';
         steps{
         withSonarQubeEnv('sonar-integration') { 
         // If you have configured more than one global server connection, you can specify its name

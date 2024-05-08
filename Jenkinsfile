@@ -22,7 +22,7 @@ tools {
         }
         // If you have configured more than one global server connection, you can specify its name
 //      sh "${scannerHome}/bin/sonar-scanner"
-        sh "mvn sonar:sonar -Dsonar.login=myAuthenticationToken"
+        sh "mvn sonar:sonar -Dsonar.login=sonar-token"
         }
         }
         }

@@ -22,7 +22,7 @@ tools {
         }
         // If you have configured more than one global server connection, you can specify its name
 //      sh "${scannerHome}/bin/sonar-scanner"
-        sh "mvn sonar:sonar -Dsonar.login=sqp_4fde5e370b62e2797d88766dafb90acf066e89db"
+        sh "mvn -X sonar:sonar -Dsonar.login=sqp_4fde5e370b62e2797d88766dafb90acf066e89db"
         }
         }
         }

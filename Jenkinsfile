@@ -27,7 +27,7 @@ tools {
         script {
         def scannerHome = tool 'SonarQube_Scanner-5.0.1';
          withSonarQubeEnv("sonar-integration") {
-         sh "${tool("SonarQube_Scanner-5.0.1")}/bin/sonar-scanner \
+         sh "${tool("SonarQube_Scanner-5.0.1")}/bin/sonar-scanner -X\
          -D.sonar.projectKey='maven-web-application' \
          -Dsonar.projectName='maven-web-application' \
          -Dsonar.host.url='https://sonar.shiawslab.com' \

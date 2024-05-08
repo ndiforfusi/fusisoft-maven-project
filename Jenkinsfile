@@ -15,14 +15,18 @@ tools {
        }
       stage('2. SonarQube analysis') {
  //     def scannerHome = tool 'sonar-integration';
-        steps{
-        withSonarQubeEnv('sonar-integration') { 
+ //       steps{
+//       withSonarQubeEnv('sonar-integration') { 
         withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-integration')]) {
     // some block
         }
         // If you have configured more than one global server connection, you can specify its name
 //      sh "${scannerHome}/bin/sonar-scanner"
-        sh "mvn clean verify sonar:sonar \
+//       sh "mvn clean verify sonar:sonar \
+      script {
+        def scannerHome = tool 'SonarQube_Scanner-5.0.1';
+         withSonarQubeEnv("sonar-integration") {
+         sh "${tool("SonarQube_Scanner-5.0.1")}/bin/sonar-scanner \
         -D.sonar.projectKey=maven-web-application \
         -Dsonar.projectName='maven-web-application' \
         -Dsonar.host.url=https://sonar.shiawslab.com \

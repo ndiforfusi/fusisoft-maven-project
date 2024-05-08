@@ -1,0 +1,22 @@
+# Complete Manifest Where in single yml we defined Deployment & Service for SpringApp & PVC(with default  StorageClass),ReplicaSet & Service For Mongo.
+apiVersion: apps/v1
+kind: Deployment
+namespace: gateway
+metadata:
+  name: webapp deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      name: webapp
+      labels:
+        app: webapp
+    spec:
+      containers:
+        - name: webapp_contianer
+          image: ndiforfusi/webapp:1.1.0
+          ports:
+            - containerPort: 8080

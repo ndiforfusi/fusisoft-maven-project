@@ -17,7 +17,7 @@ tools {
  //     def scannerHome = tool 'sonar-integration';
  //       steps{
 //       withSonarQubeEnv('sonar-integration') { 
-        withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-integration')]) {
+ //       withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-integration')]) {
     // some block
         }
         // If you have configured more than one global server connection, you can specify its name

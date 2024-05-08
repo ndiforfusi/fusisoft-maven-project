@@ -23,7 +23,7 @@ tools {
         // If you have configured more than one global server connection, you can specify its name
 //      sh "${scannerHome}/bin/sonar-scanner"
 //       sh "mvn clean verify sonar:sonar \
-      script {
+         steps {
         def scannerHome = tool 'SonarQube_Scanner-5.0.1';
          withSonarQubeEnv("sonar-integration") {
          sh "${tool("SonarQube_Scanner-5.0.1")}/bin/sonar-scanner \

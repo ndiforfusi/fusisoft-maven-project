@@ -36,10 +36,10 @@ tools {
       //     }
       stage('3. Docker image build') {
          steps{
-          sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com"
-          sh "docker build -t webapp ."
-          sh "docker tag webapp:latest ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
-          sh "docker push ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
+          sh "aws ecr get-login-password --region us-west-2 | sudo docker login --username AWS --password-stdin ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com"
+          sh "sudo docker build -t webapp ."
+          sh "sudo docker tag webapp:latest ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
+          sh "sudo docker push ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
          }
        }
       stage('4. Deployment into kubernetes cluster') {

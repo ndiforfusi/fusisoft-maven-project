@@ -24,10 +24,11 @@ tools {
 //      sh "${scannerHome}/bin/sonar-scanner"
 //       sh "mvn clean verify sonar:sonar \
       steps {
-        script {
-        def scannerHome = tool 'SonarQube_Scanner-5.0.1';
+       script {
+         def scannerHome = tool 'SonarQube_Scanner-5.0.1';
          withSonarQubeEnv("sonar-integration") {
-         sh "${tool("SonarQube_Scanner-5.0.1")}/bin/sonar-scanner -X -D.sonar.projectKey=develop -Dsonar.sources=. \
+         sh "${tool("SonarQube_Scanner-5.0.1")}/bin/sonar-scanner -X \
+         -Dsonar.projectKey=maven-web-application \
          -Dsonar.projectName='maven-web-application' \
          -Dsonar.host.url=https://sonar.shiawslab.com \
          -Dsonar.token=sqp_9e7de9d43df91ec5831d3090a1762e8dd67eae93"

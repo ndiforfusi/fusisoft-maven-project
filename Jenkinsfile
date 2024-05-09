@@ -25,7 +25,7 @@ tools {
          -Dsonar.projectKey=maven-web-application \
          -Dsonar.projectName='maven-web-application' \
          -Dsonar.host.url=https://sonar.shiawslab.com \
-         -Dsonar.token=$(SONAR_TOKEN)"
+         -Dsonar.token=$SONAR_TOKEN"
  //        -Dsonar.token=sqp_9e7de9d43df91ec5831d3090a1762e8dd67eae93"
         }
         }

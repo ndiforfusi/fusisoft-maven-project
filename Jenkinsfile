@@ -15,6 +15,9 @@ tools {
        }
       stage('2. SonarQube analysis') {
       steps {
+        environment {
+                SONAR_TOKEN = credentials('sonar-token')
+            }
        script {
          def scannerHome = tool 'SonarQube_Scanner-5.0.1';
          withSonarQubeEnv("sonar-integration") {
@@ -22,7 +25,8 @@ tools {
          -Dsonar.projectKey=maven-web-application \
          -Dsonar.projectName='maven-web-application' \
          -Dsonar.host.url=https://sonar.shiawslab.com \
-         -Dsonar.token=sqp_9e7de9d43df91ec5831d3090a1762e8dd67eae93"
+         -Dsonar.token=$(SONAR_TOKEN)"
+ //        -Dsonar.token=sqp_9e7de9d43df91ec5831d3090a1762e8dd67eae93"
         }
         }
       }

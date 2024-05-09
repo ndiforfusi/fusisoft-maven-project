@@ -44,8 +44,6 @@ tools {
       stage('5. Deployment into kubernetes cluster') {
         steps{
           kubeconfig(credentialsId: 'k8s-kubeconfig', serverUrl: '') {
-          }
-          script {
           sh "kubectl apply -f manifest/namespace.yaml"
           sh "kubectl apply -f manifest"
           }

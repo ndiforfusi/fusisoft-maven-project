@@ -14,10 +14,8 @@ tools {
          }
        }
       stage('2. SonarQube analysis') {
+      environment {SONAR_TOKEN = credentials('sonar-token')}
       steps {
-        environment {
-                SONAR_TOKEN = credentials('sonar-token')
-            }
        script {
          def scannerHome = tool 'SonarQube_Scanner-5.0.1';
          withSonarQubeEnv("sonar-integration") {

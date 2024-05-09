@@ -8,12 +8,17 @@ tools {
     maven "Maven-3.9.6"
     }
     stages {
-      stage('1. Build with maven') { 
+      stage('1. Git Checkout') {
+        steps {
+          git branch: 'release', credentialsId: 'github-repo-pat', url: 'https://github.com/ndiforfusi/fusisoft-maven-project.git'
+        }
+      }
+      stage('2. Build with maven') { 
         steps{
           sh "mvn clean package"
          }
        }
-      stage('2. SonarQube analysis') {
+      stage('3. SonarQube analysis') {
       environment {SONAR_TOKEN = credentials('sonar-token')}
       steps {
        script {
@@ -28,7 +33,7 @@ tools {
         }
       }
       }
-      stage('3. Docker image build') {
+      stage('4. Docker image build') {
          steps{
           sh "aws ecr get-login-password --region us-west-2 | sudo docker login --username AWS --password-stdin ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com"
           sh "sudo docker build -t webapp ."
@@ -36,8 +41,10 @@ tools {
           sh "sudo docker push ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
          }
        }
-      stage('4. Deployment into kubernetes cluster') {
+      stage('5. Deployment into kubernetes cluster') {
         steps{
+          kubeconfig(credentialsId: 'k8s-kubeconfig', serverUrl: '') {
+          }
           script {
           sh "kubectl apply -f manifest/namespace.yaml"
           sh "kubectl apply -f manifest"
@@ -45,7 +52,7 @@ tools {
          }
        }
 
-      stage ('5. Email Notification') {
+      stage ('6. Email Notification') {
          steps{
          mail bcc: 'fusisoft@gmail.com', body: '''Build is Over. check application on. 
          http://3.143.231.151:8085/myapps/

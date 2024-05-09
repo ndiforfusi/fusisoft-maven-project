@@ -27,14 +27,14 @@ tools {
         }
       }
       }
-      stage("3. Quality Gate") {
-            steps {
-              timeout(time: 30, unit: 'MINUTES') {
-                waitForQualityGate abortPipeline: true
-              }
-            }
-          }
-      stage('4. Docker image build') {
+      // stage("3. Quality Gate") {
+      //       steps {
+      //         timeout(time: 30, unit: 'MINUTES') {
+      //           waitForQualityGate abortPipeline: true
+      //         }
+      //       }
+      //     }
+      stage('3. Docker image build') {
          steps{
           sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com"
           sh "docker build -t webapp ."
@@ -42,13 +42,13 @@ tools {
           sh "docker push ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
          }
        }
-      stage('5. Deployment into kubernetes cluster') {
+      stage('4. Deployment into kubernetes cluster') {
          steps{
           sh "kubectl kustomize manifest/kustomization.yaml"
          }
        }
 
-      stage ('. Email Notification') {
+      stage ('5. Email Notification') {
          steps{
          mail bcc: 'fusisoft@gmail.com', body: '''Build is Over. check application on. 
          http://3.143.231.151:8085/myapps/

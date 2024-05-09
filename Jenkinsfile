@@ -44,7 +44,7 @@ tools {
        }
       stage('4. Deployment into kubernetes cluster') {
          steps{
-          sh "kubectl kustomize manifest/kustomization.yaml"
+          sh "kubectl apply -f manifest"
          }
        }
 

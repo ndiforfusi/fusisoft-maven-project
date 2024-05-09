@@ -29,14 +29,14 @@ tools {
       }
       stage("3. Quality Gate") {
             steps {
-              timeout(time: 3, unit: 'MINUTES') {
+              timeout(time: 30, unit: 'MINUTES') {
                 waitForQualityGate abortPipeline: true
               }
             }
           }
       stage('4. Docker image build') {
          steps{
-          sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 322266404742.dkr.ecr.us-west-2.amazonaws.com"
+          sh "aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com"
           sh "docker build -t webapp ."
           sh "docker tag webapp:latest ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
           sh "docker push ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"

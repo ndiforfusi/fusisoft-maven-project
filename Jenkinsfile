@@ -24,18 +24,10 @@ tools {
          -Dsonar.projectName='maven-web-application' \
          -Dsonar.host.url=https://sonar.shiawslab.com \
          -Dsonar.token=$SONAR_TOKEN"
- //        -Dsonar.token=sqp_9e7de9d43df91ec5831d3090a1762e8dd67eae93"
         }
         }
       }
       }
-      // stage("3. Quality Gate") {
-      //       steps {
-      //         timeout(time: 30, unit: 'MINUTES') {
-      //           waitForQualityGate abortPipeline: true
-      //         }
-      //       }
-      //     }
       stage('3. Docker image build') {
          steps{
           sh "aws ecr get-login-password --region us-west-2 | sudo docker login --username AWS --password-stdin ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com"

@@ -43,9 +43,11 @@ tools {
          }
        }
       stage('4. Deployment into kubernetes cluster') {
-         steps{
+        steps{
+          script {
           sh "kubectl apply -f manifest/namespace.yaml"
           sh "kubectl apply -f manifest"
+          }
          }
        }
 

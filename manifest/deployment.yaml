@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: webapp_contianer
-          image: ndiforfusi/webapp:1.1.0
+          image: 322266404742.dkr.ecr.us-west-2.amazonaws.com/webapp:1.0.0
           ports:
             - containerPort: 8080

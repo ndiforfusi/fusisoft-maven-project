@@ -1,8 +1,8 @@
 pipeline {
  agent { node { label "maven-sonarqube-deploy-node" } }
  parameters   {
-   string(name: 'aws_account', defaultValue: '322266404742', description: 'aws account hosting image registry')
-   string(name: 'ecr_tag', defaultValue: '1.0.0', description: 'aws ecr image tag')
+   choice(name: 'aws_account', defaultValue: '322266404742,4568366404742,922266408974', description: 'aws account hosting image registry')
+   choice(name: 'ecr_tag',choices: ['1.1.0','1.2.0','1.3.0'], description: 'Choose the ecr tag version for the build')
        }
 tools {
     maven "Maven-3.9.6"
@@ -44,7 +44,6 @@ tools {
       stage('5. Deployment into kubernetes cluster') {
         steps{
           kubeconfig(caCertificate: '',credentialsId: 'k8s-kubeconfig', serverUrl: '') {
-          sh "kubectl apply -f manifest/namespace.yaml"
           sh "kubectl apply -f manifest"
           }
          }
@@ -52,12 +51,11 @@ tools {
 
       stage ('6. Email Notification') {
          steps{
-         mail bcc: 'fusisoft@gmail.com', body: '''Build is Over. check application on. 
-         http://3.143.231.151:8085/myapps/
-         Check the website URL for latest changes.
+         mail bcc: 'fusisoft@gmail.com', body: '''Build is Over. Check the application using the URL below. 
+         https//webapp.shiawslab.com
          Let me know if the changes look okay.
          Thanks,
-         Fusisoft Technologies,
+         Dominion System Technologies,
          +1 (313) 413-1477''', cc: 'fusisoft@gmail.com', from: '', replyTo: '', subject: 'Application was Successfully Deployed!!', to: 'fusisoft@gmail.com'
       }
     }

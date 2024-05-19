@@ -16,11 +16,10 @@ spec:
     - host: webapp.shiawslab.com
       http:
         paths:
-          paths:
-            - path: /myapps
-              pathType: Prefix
-              backend:
-                service:
-                  name: webapp-service
-                  port:
-                    number: 8080
+          - path: /myapps
+            pathType: Prefix
+            backend:
+              service:
+                name: webapp-service
+                port:
+                  number: 8080

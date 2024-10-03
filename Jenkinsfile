@@ -1,8 +1,8 @@
 pipeline {
  agent { node { label "maven-sonarqube-deploy-node" } }
  parameters   {
-   choice(name: 'aws_account',choices: ['322266404742', '4568366404742', '922266408974'], description: 'aws account hosting image registry')
-   choice(name: 'ecr_tag',choices: ['1.1.0','1.2.0','1.3.0'], description: 'Choose the ecr tag version for the build')
+   choice(name: 'aws_account',choices: ['999568710647', '4568366404742', '922266408974'], description: 'aws account hosting image registry')
+   string(name: 'ecr_tag',defaultValue: '1.0.0', description: 'Assign the ecr tag version for the build')
        }
 tools {
     maven "Maven-3.9.6"
@@ -27,7 +27,7 @@ tools {
          sh "${tool("SonarQube_Scanner-5.0.1")}/bin/sonar-scanner -X \
          -Dsonar.projectKey=maven-web-application \
          -Dsonar.projectName='maven-web-application' \
-         -Dsonar.host.url=https://sonar.shiawslab.com \
+         -Dsonar.host.url=https://sonar.dominionsystem.com \
          -Dsonar.token=$SONAR_TOKEN"
         }
         }
@@ -41,15 +41,21 @@ tools {
           sh "sudo docker push ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
          }
        }
-      stage('5. Deployment into kubernetes cluster') {
+      stage('5. Application deployment in kubernetes cluster') {
         steps{
           kubeconfig(caCertificate: '',credentialsId: 'k8s-kubeconfig', serverUrl: '') {
           sh "kubectl apply -f manifest"
           }
          }
        }
-
-      stage ('6. Email Notification') {
+      stage('6. Monitoring solution deployment in kubernetes cluster') {
+        steps{
+          kubeconfig(caCertificate: '',credentialsId: 'k8s-kubeconfig', serverUrl: '') {
+          sh "kubectl apply -f monitoring"
+          }
+         }
+       }
+      stage ('7. Email Notification') {
          steps{
          mail bcc: 'fusisoft@gmail.com', body: '''Build is Over. Check the application using the URL below. 
          https//webapp.shiawslab.com

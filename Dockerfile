@@ -1,7 +1,8 @@
-FROM tomcat:10.1-jdk8
+FROM tomcat:10.1.14-jdk8-temurin
 ADD ./target/myapps.war /usr/local/tomcat/webapps/
 EXPOSE 8080
-CMD ["catalina.sh", "run"]
+ENTRYPOINT ["catalina.sh", "run"]
+
 
 
 

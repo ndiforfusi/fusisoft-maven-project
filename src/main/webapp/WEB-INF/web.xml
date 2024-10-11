@@ -1,23 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>maven-web-application</display-name>
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/mt-servlet.xml</param-value>
-  </context-param>
-  <servlet>
-    <servlet-name>mt</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>mt</servlet-name>
-    <url-pattern>/services/*</url-pattern>
-  </servlet-mapping>
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-  <welcome-file-list>
-    <welcome-file>/jsps/home.jsp</welcome-file>
-  </welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1" id="WebApp_ID">
+
+    <!-- Display name for the web application -->
+    <display-name>maven-web-application</display-name>
+
+    <!-- Context parameter to specify Spring configuration file location -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/mt-servlet.xml</param-value>
+    </context-param>
+
+    <!-- Spring's DispatcherServlet configuration -->
+    <servlet>
+        <servlet-name>mt</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- Ensure this servlet is loaded on startup -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- URL mapping for the DispatcherServlet -->
+    <servlet-mapping>
+        <servlet-name>mt</servlet-name>
+        <url-pattern>/services/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Spring ContextLoaderListener to manage lifecycle of the root application context -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Welcome file list specifying the default JSP page -->
+    <welcome-file-list>
+        <welcome-file>/jsps/home.jsp</welcome-file>
+    </welcome-file-list>
+
 </web-app>

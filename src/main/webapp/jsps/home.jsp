@@ -1,52 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-	<html>
-	<link href="images/symbol_logo.jpg" rel="icon">
-	<div style="text-align: right;">
-		<span>
-			<img src="images/symbol_logo.jpg" alt="" width="100">
-		</span>
+	<!DOCTYPE html>
+	<html lang="en">
 
-		<head>
-			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			<title>We Love Fusisoft Technologies- Home Page</title>
-			<title>We strive for excellence in service delivery</title>
-			<title>We also sell network devices and appliances accross the globe</title>
-			<link href="images/Logo-principal.jpg" rel="icon">
-		</head>
-		</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Fusisoft Technologies - Pioneers in IT Solutions</title>
+		<link href="images/symbol_logo.jpg" rel="icon">
+	</head>
 
-		<body>
-			<h1 align="center">Fusisoft Technologies - Leaders in Software Delivery and DevOps Automation Engineering
-			</h1>
-			<h1 align="center">Thank you for your interest in our business</h1 <h1 align="center">
-			<h2 align="center">Welcome to Fusisoft Technologies where we offer world class support and consultancy for
-				all
-				your DevOps and
-				Cloud Infrastructures needs.</h2>
-			<h1 align="center">We seek to provide all your IT Infrastructural needs
-				</h2>
-				<hr>
-				<div style="text-align: center;">
-					<span>
-						<img src="images/Logo-principal.jpg" alt="" width="400">
-					</span>
-					<span style="font-weight: bold;">
-						Fusisoft Technologies,
-						11111 Katy Freeway, suite 910
-						+1 (313) 413-1477,
-						fusisoft@gmail.com
-						<br>
-						<a href="mailto:fusisoft@gmail.com">Send Mail to Fusisoft Technologies</a>
-					</span>
-				</div>
-				<hr>
-				<p> Service : <a href="services/employee/getEmployeeDetails">Get Employee Details </p>
-				<hr>
-				<hr>
-				<p align=center>Fusisoft Technologies,an IT consulting and Development Center.</p>
-				<p align=center><small>Copyrights 2022 by <a href="fusisoft.com">Fusisoft Technologies</a> </small></p>
+	<body>
+		<div style="text-align: right;">
+			<img src="images/symbol_logo.jpg" alt="Fusisoft Logo" width="100">
+		</div>
 
-		</body>
+		<h1 align="center">Fusisoft Technologies - Innovators in Software Development and DevOps Engineering</h1>
+		<h2 align="center">Thank you for your interest in partnering with us</h2>
+		<h3 align="center">Welcome to Fusisoft Technologies, where we provide top-tier support and consultancy for all
+			your DevOps and Cloud Infrastructure needs.</h3>
+		<h3 align="center">We're committed to delivering comprehensive IT solutions tailored to your business.</h3>
+
+		<hr>
+
+		<div style="text-align: center;">
+			<img src="images/Logo-principal.jpg" alt="Fusisoft Logo" width="400">
+			<p style="font-weight: bold;">
+				Fusisoft Technologies,<br>
+				11111 Katy Freeway, Suite 910<br>
+				Phone: +1 (313) 413-1477<br>
+				Email: <a href="mailto:fusisoft@gmail.com">fusisoft@gmail.com</a>
+			</p>
+		</div>
+
+		<hr>
+
+		<div style="text-align: center;">
+			<p><a href="services/employee/getEmployeeDetails">Access Employee Details</a></p>
+		</div>
+
+		<hr>
+
+		<footer style="text-align: center;">
+			<p>Fusisoft Technologies - Your trusted partner in IT consulting and development.</p>
+			<p><small>&copy; 2022 <a href="http://fusisoft.com" target="_blank">Fusisoft Technologies</a></small></p>
+		</footer>
+
+	</body>
 
 	</html>

@@ -6,8 +6,7 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:999568710647:certificate/e9822346-ba84-4860-b6b0-fdabd5a22827
-    #   alb.ingress.kubernetes.io/subnets:
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}],[{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/healthcheck-port: "8080"
     alb.ingress.kubernetes.io/ssl-redirect: "443"
@@ -18,6 +17,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
+  - host: "" # Optionally specify a host, or leave it empty for all hosts
     http:
       paths:
       - path: /myapps
@@ -27,3 +27,4 @@ spec:
             name: webapp-service
             port:
               number: 8080
+

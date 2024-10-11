@@ -1,4 +1,4 @@
-FROM tomcat:jre21-temurin
+FROM tomcat:9.0.37-jdk8
 ADD ./target/myapps.war /usr/local/tomcat/webapps/
 EXPOSE 8080
 ENTRYPOINT ["catalina.sh", "run"]

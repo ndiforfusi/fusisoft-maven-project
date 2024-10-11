@@ -71,22 +71,6 @@
 				margin-bottom: 20px;
 			}
 
-			footer {
-				padding: 20px;
-				background-color: #003366;
-				color: white;
-				text-align: center;
-			}
-
-			footer a {
-				color: #ffcc00;
-			}
-
-			footer small {
-				display: block;
-				margin-top: 10px;
-			}
-
 			.contact-info {
 				text-align: center;
 				margin: 50px 0;
@@ -108,6 +92,56 @@
 
 			.logo-container img {
 				width: 300px;
+			}
+
+			form {
+				width: 60%;
+				margin: 0 auto;
+				padding: 20px;
+				border: 1px solid #ddd;
+				background-color: #f9f9f9;
+				border-radius: 8px;
+			}
+
+			form h2 {
+				text-align: center;
+				color: #003366;
+			}
+
+			form input,
+			form textarea {
+				width: 100%;
+				padding: 10px;
+				margin: 10px 0;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+			}
+
+			form input[type="submit"] {
+				background-color: #003366;
+				color: white;
+				border: none;
+				cursor: pointer;
+			}
+
+			form input[type="submit"]:hover {
+				background-color: #005599;
+			}
+
+			footer {
+				padding: 20px;
+				background-color: #003366;
+				color: white;
+				text-align: center;
+			}
+
+			footer a {
+				color: #ffcc00;
+			}
+
+			footer small {
+				display: block;
+				margin-top: 10px;
 			}
 		</style>
 	</head>
@@ -159,6 +193,24 @@
 					to full threat monitoring and incident response.</p>
 			</div>
 		</section>
+
+		<!-- Contact Form Section -->
+		<form action="contactSubmit.jsp" method="post">
+			<h2>Contact Us</h2>
+			<label for="name">Name:</label>
+			<input type="text" id="name" name="name" required>
+
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" required>
+
+			<label for="phone">Phone:</label>
+			<input type="text" id="phone" name="phone" required>
+
+			<label for="project">Project Description:</label>
+			<textarea id="project" name="project" rows="5" required></textarea>
+
+			<input type="submit" value="Submit">
+		</form>
 
 		<!-- Contact Information Section -->
 		<div class="contact-info">

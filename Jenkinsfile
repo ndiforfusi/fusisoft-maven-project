@@ -42,7 +42,7 @@ pipeline {
         sh "aws ecr get-login-password --region us-west-2 | sudo docker login --username AWS --password-stdin ${aws_account}.dkr.ecr.us-west-2.amazonaws.com"
         sh "sudo docker build -t webapp ."
         sh "sudo docker tag webapp:latest ${aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
-        sh "sud docker push ${aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
+        sh "sudo docker push ${aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
       }
     }
 

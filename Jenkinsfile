@@ -1,6 +1,7 @@
 pipeline {
     agent { node { label "maven-sonarqube-node" } }   
     parameters {
+      choice(name: 'aws_account',choices: ['999568710647', '4568366404742', '922266408974','576900672829'], description: 'aws account hosting image registry')
       choice(name: 'Environment', choices: ['Dev', 'QA', 'UAT', 'Prod'], description: 'Target environment for deployment')
       string(name: 'ecr_tag', defaultValue: '1.0.0', description: 'Assign the ECR tag version for the build')
     }
@@ -12,7 +13,7 @@ pipeline {
     stages {
     stage('1. Git Checkout') {
       steps {
-        git branch: 'release', credentialsId: 'Github-pat', url: 'https://github.com/ndiforfusi/addressbook.git'
+        git branch: 'release', credentialsId: 'Github-pat', url: 'https://github.com/ndiforfusi/fusisoft-maven-project.git'
       }
     }
     stage('2. Build with Maven') { 
@@ -28,22 +29,20 @@ pipeline {
               withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                       sh """
                       ${scannerHome}/bin/sonar-scanner  \
-                      -Dsonar.projectKey=addressbook-application \
-                      -Dsonar.projectName='addressbook-application' \
+                      -Dsonar.projectKey=maven-web-application \
+                      -Dsonar.projectName='maven-web-application' \
                       -Dsonar.host.url=https://sonarqube.dominionsystem.org \
                       -Dsonar.token=${SONAR_TOKEN} \
-                      -Dsonar.sources=src/main/java/ \
-                      -Dsonar.java.binaries=target/classes \
                      """
                   }
               }
         }
     stage('4. Docker Image Build') {
       steps {
-        sh "aws ecr-public get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin public.ecr.aws/a1o0c8b5"
-        sh "sudo docker build -t addressbook ."
-        sh "sudo docker tag addressbook:latest public.ecr.aws/a1o0c8b5/addressbook:${params.ecr_tag}"
-        sh "sudo docker push public.ecr.aws/a1o0c8b5/addressbook:${params.ecr_tag}"
+        sh "aws ecr get-login-password --region us-west-2 | sudo docker login --username AWS --password-stdin ${aws_account}.dkr.ecr.us-west-2.amazonaws.com"
+        sh "sudo docker build -t webapp ."
+        sh "sudo docker tag webapp:latest ${aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
+        sh "sud docker push ${aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
       }
     }
 

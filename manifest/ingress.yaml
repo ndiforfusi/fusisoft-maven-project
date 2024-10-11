@@ -18,12 +18,12 @@ spec:
   ingressClassName: alb
   rules:
   - http:
-    paths:
-    - path: /myapps
-      pathType: Prefix
-      backend:
-        service:
-          name: webapp-service
-          port:
-            number: 8080
+      paths:
+      - path: /myapps
+        pathType: Prefix
+        backend:
+          service:
+            name: webapp-service
+            port:
+              number: 8080
 

@@ -13,7 +13,7 @@ pipeline {
     stages {
     stage('1. Git Checkout') {
       steps {
-        git branch: 'release', credentialsId: 'Github-pat', url: 'https://github.com/ndiforfusi/fusisoft-maven-project.git'
+        git branch: 'release', credentialsId: 'github-maven-webapp-pat', url: 'https://github.com/ndiforfusi/fusisoft-maven-project.git'
       }
     }
     stage('2. Build with Maven') { 

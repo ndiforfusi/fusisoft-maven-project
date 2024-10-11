@@ -17,14 +17,12 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: "" # Optionally specify a host, or leave it empty for all hosts
-    http:
-      paths:
-      - path: /myapps
-        pathType: Prefix
-        backend:
-          service:
-            name: webapp-service
-            port:
-              number: 8080
+  - http:
+    - path: /myapps
+      pathType: Prefix
+      backend:
+        service:
+          name: webapp-service
+          port:
+            number: 8080
 

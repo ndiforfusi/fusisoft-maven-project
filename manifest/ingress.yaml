@@ -18,6 +18,7 @@ spec:
   ingressClassName: alb
   rules:
   - http:
+    paths:
     - path: /myapps
       pathType: Prefix
       backend:

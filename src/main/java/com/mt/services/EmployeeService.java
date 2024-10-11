@@ -1,39 +1,38 @@
 package com.mt.services;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/employee")
 public class EmployeeService {
 
-    @GetMapping("/getEmployeeDetails")
-    @ResponseBody
-    public ResponseEntity<String> getEmployeeDetails(HttpSession session) {
-        try {
-            JSONObject js = new JSONObject();
-            js.put("firstName", "Ndifor");
-            js.put("lastName", "Fusi");
-            js.put("website", "tech.fusisoft.com");
-            js.put("dob", "May 1, 1975");
-            js.put("hobbies", "Praying, Singing, Reading Technical Blogs, Teaching, Helping the Poor");
-            js.put("bornIn", "Africa, Cameroon, Bali");
-            js.put("placesHeLikes", "Africa, NA, Bali");
+    @RequestMapping(value = "/saveEmployeeDetails", method = RequestMethod.POST)
+    public String saveEmployeeDetails(HttpServletRequest request, HttpSession session) {
+        // Capture form data from the request
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String website = request.getParameter("website");
+        String dob = request.getParameter("dob");
+        String hobbies = request.getParameter("hobbies");
+        String birthPlace = request.getParameter("birthPlace");
+        String favoritePlaces = request.getParameter("favoritePlaces");
 
-            // Return a proper ResponseEntity with the JSON data and a status of OK
-            return new ResponseEntity<>(js.toString(), HttpStatus.OK);
+        // Store the data in session
+        session.setAttribute("firstName", firstName);
+        session.setAttribute("lastName", lastName);
+        session.setAttribute("website", website);
+        session.setAttribute("dob", dob);
+        session.setAttribute("hobbies", hobbies);
+        session.setAttribute("birthPlace", birthPlace);
+        session.setAttribute("favoritePlaces", favoritePlaces);
 
-        } catch (JSONException e) {
-            // Handle the exception and return a proper error message
-            return new ResponseEntity<>("Error creating employee details", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        // Redirect to the employeeDetails.jsp to display the data
+        return "employeeDetails";
     }
 }
+

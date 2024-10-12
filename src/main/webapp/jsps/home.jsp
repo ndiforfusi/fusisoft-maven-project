@@ -51,10 +51,19 @@
 			}
 
 			.service {
+				display: inline-block;
+				width: 250px;
 				margin: 20px;
-				text-align: left;
 				padding: 20px;
-				border-bottom: 1px solid #ddd;
+				border: 1px solid #ddd;
+				border-radius: 8px;
+				background-color: #f9f9f9;
+			}
+
+			.service img {
+				width: 100%;
+				height: auto;
+				border-radius: 8px;
 			}
 
 			.service h3 {
@@ -63,8 +72,7 @@
 			}
 
 			.service p {
-				font-size: 1em;
-				margin-bottom: 10px;
+				margin-bottom: 15px;
 			}
 
 			.service a {
@@ -77,13 +85,23 @@
 				text-decoration: underline;
 			}
 
-			.logo-container {
+			.contact-info {
 				text-align: center;
 				margin: 50px 0;
 			}
 
-			.logo-container img {
-				width: 300px;
+			.contact-info p {
+				font-size: 1.2em;
+			}
+
+			.contact-info a {
+				color: #003366;
+				font-weight: bold;
+				text-decoration: none;
+			}
+
+			.contact-info a:hover {
+				text-decoration: underline;
 			}
 
 			footer {
@@ -100,6 +118,16 @@
 			footer small {
 				display: block;
 				margin-top: 10px;
+			}
+
+			.logo-container {
+				text-align: center;
+				margin: 50px 0;
+			}
+
+			.logo-container img {
+				width: 300px;
+				height: auto;
 			}
 		</style>
 	</head>
@@ -118,44 +146,55 @@
 
 			<!-- Service 1: DevOps Consulting -->
 			<div class="service">
+				<img src="images/devops.jpg" alt="DevOps Consulting">
 				<h3>DevOps Consulting</h3>
 				<p>Accelerate your software development lifecycle with our DevOps expertise. We help you automate,
 					scale, and optimize your development processes.</p>
-				<a href="jsps/devops-consulting.jsp">Learn More</a>
+				<a href="devops-consulting.jsp">Learn More</a>
 			</div>
 
 			<!-- Service 2: SRE -->
 			<div class="service">
+				<img src="images/sre.jpg" alt="Site Reliability Engineering">
 				<h3>Site Reliability Engineering (SRE)</h3>
 				<p>Ensure high availability and top-notch performance of your services through our proven SRE
 					methodologies, built for resilience and efficiency.</p>
-				<a href="jsps/sre.jsp">Learn More</a>
+				<a href="sre.jsp">Learn More</a>
 			</div>
 
 			<!-- Service 3: DevSecOps -->
 			<div class="service">
+				<img src="images/devsecops.jpg" alt="DevSecOps Integration">
 				<h3>DevSecOps Integration</h3>
 				<p>Embed security within your development pipeline, ensuring every application and system is protected
 					with advanced security protocols from the start.</p>
-				<a href="jsps/devsecops.jsp">Learn More</a>
+				<a href="devsecops.jsp">Learn More</a>
 			</div>
 
 			<!-- Service 4: Infrastructure as Code -->
 			<div class="service">
+				<img src="images/iac.jpg" alt="Infrastructure as Code">
 				<h3>Infrastructure as Code (IaC)</h3>
 				<p>Automate your infrastructure setup with our IaC solutions, leveraging tools like Terraform and AWS
 					CloudFormation to manage your cloud environments.</p>
-				<a href="jsps/iac.jsp">Learn More</a>
+				<a href="iac.jsp">Learn More</a>
 			</div>
 
 			<!-- Service 5: Cybersecurity -->
 			<div class="service">
+				<img src="images/cybersecurity.jpg" alt="Cybersecurity Solutions">
 				<h3>Cybersecurity Solutions</h3>
 				<p>Protect your business with our comprehensive cybersecurity services, from vulnerability assessments
 					to full threat monitoring and incident response.</p>
-				<a href="jsps/cybersecurity.jsp">Learn More</a>
+				<a href="cybersecurity.jsp">Learn More</a>
 			</div>
 		</section>
+
+		<!-- Contact Information Section -->
+		<div class="contact-info">
+			<p><strong>Have a Project?</strong> Contact Us Below:</p>
+			<p><a href="contact.jsp">Submit Your Project Details</a></p>
+		</div>
 
 		<!-- Logo Section -->
 		<div class="logo-container">

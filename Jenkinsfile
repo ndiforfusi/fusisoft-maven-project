@@ -33,6 +33,8 @@ pipeline {
                       -Dsonar.projectName='maven-web-application' \
                       -Dsonar.host.url=https://sonarqube.dominionsystem.org \
                       -Dsonar.token=${SONAR_TOKEN} \
+                      -Dsonar.java.binaries=target/classes \
+
                      """
                   }
               }

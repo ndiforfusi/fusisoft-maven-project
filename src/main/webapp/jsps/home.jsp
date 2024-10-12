@@ -60,15 +60,25 @@
 				background-color: #f9f9f9;
 			}
 
+			.service img {
+				width: 100%;
+				height: auto;
+				border-radius: 8px;
+			}
+
 			.service h3 {
 				color: #003366;
 				font-size: 1.5em;
 			}
 
-			.service p {
-				font-size: 1em;
-				line-height: 1.5em;
-				margin-bottom: 20px;
+			.service a {
+				text-decoration: none;
+				color: #003366;
+				font-weight: bold;
+			}
+
+			.service a:hover {
+				text-decoration: underline;
 			}
 
 			.contact-info {
@@ -83,49 +93,11 @@
 			.contact-info a {
 				color: #003366;
 				font-weight: bold;
+				text-decoration: none;
 			}
 
-			.logo-container {
-				text-align: center;
-				margin: 20px 0;
-			}
-
-			.logo-container img {
-				width: 300px;
-			}
-
-			form {
-				width: 60%;
-				margin: 0 auto;
-				padding: 20px;
-				border: 1px solid #ddd;
-				background-color: #f9f9f9;
-				border-radius: 8px;
-			}
-
-			form h2 {
-				text-align: center;
-				color: #003366;
-			}
-
-			form input,
-			form textarea {
-				width: 100%;
-				padding: 10px;
-				margin: 10px 0;
-				border: 1px solid #ccc;
-				border-radius: 4px;
-			}
-
-			form input[type="submit"] {
-				background-color: #003366;
-				color: white;
-				border: none;
-				cursor: pointer;
-			}
-
-			form input[type="submit"]:hover {
-				background-color: #005599;
+			.contact-info a:hover {
+				text-decoration: underline;
 			}
 
 			footer {
@@ -151,7 +123,7 @@
 		<header>
 			<img src="images/symbol_logo.jpg" alt="Fusisoft Logo">
 			<h1>Fusisoft Technologies</h1>
-			<h2>Leading Experts in IT Consulting & Cloud Engineering</h2>
+			<h2>Your Partner in IT Consulting & Engineering</h2>
 		</header>
 
 		<!-- Services Section -->
@@ -160,75 +132,52 @@
 
 			<!-- Service 1: DevOps Consulting -->
 			<div class="service">
+				<img src="images/devops.jpg" alt="DevOps Consulting">
 				<h3>DevOps Consulting</h3>
-				<p>Accelerate your software development lifecycle with our DevOps expertise. We help you automate,
-					scale, and optimize your development processes.</p>
+				<a href="devops-consulting.jsp">Learn More</a>
 			</div>
 
-			<!-- Service 2: Site Reliability Engineering (SRE) -->
+			<!-- Service 2: SRE -->
 			<div class="service">
+				<img src="images/sre.jpg" alt="Site Reliability Engineering">
 				<h3>Site Reliability Engineering (SRE)</h3>
-				<p>Ensure high availability and top-notch performance of your services through our proven SRE
-					methodologies, built for resilience and efficiency.</p>
+				<a href="sre.jsp">Learn More</a>
 			</div>
 
-			<!-- Service 3: DevSecOps Integration -->
+			<!-- Service 3: DevSecOps -->
 			<div class="service">
+				<img src="images/devsecops.jpg" alt="DevSecOps Integration">
 				<h3>DevSecOps Integration</h3>
-				<p>Embed security within your development pipeline, ensuring every application and system is protected
-					with advanced security protocols from the start.</p>
+				<a href="devsecops.jsp">Learn More</a>
 			</div>
 
-			<!-- Service 4: Infrastructure as Code (IaC) -->
+			<!-- Service 4: Infrastructure as Code -->
 			<div class="service">
+				<img src="images/iac.jpg" alt="Infrastructure as Code">
 				<h3>Infrastructure as Code (IaC)</h3>
-				<p>Automate your infrastructure setup with our IaC solutions, leveraging tools like Terraform and AWS
-					CloudFormation to manage your cloud environments.</p>
+				<a href="iac.jsp">Learn More</a>
 			</div>
 
-			<!-- Service 5: Cybersecurity Solutions -->
+			<!-- Service 5: Cybersecurity -->
 			<div class="service">
+				<img src="images/cybersecurity.jpg" alt="Cybersecurity Solutions">
 				<h3>Cybersecurity Solutions</h3>
-				<p>Protect your business with our comprehensive cybersecurity services, from vulnerability assessments
-					to full threat monitoring and incident response.</p>
+				<a href="cybersecurity.jsp">Learn More</a>
 			</div>
 		</section>
 
-		<!-- Contact Form Section -->
-		<form action="contactSubmit.jsp" method="post">
-			<h2>Contact Us</h2>
-			<label for="name">Name:</label>
-			<input type="text" id="name" name="name" required>
-
-			<label for="email">Email:</label>
-			<input type="email" id="email" name="email" required>
-
-			<label for="phone">Phone:</label>
-			<input type="text" id="phone" name="phone" required>
-
-			<label for="project">Project Description:</label>
-			<textarea id="project" name="project" rows="5" required></textarea>
-
-			<input type="submit" value="Submit">
-		</form>
-
 		<!-- Contact Information Section -->
 		<div class="contact-info">
-			<p><strong>Contact Us:</strong></p>
-			<p>Fusisoft Technologies, 11111 Katy Freeway, Suite 910</p>
-			<p>Phone: +1 (313) 413-1477 | Email: <a href="mailto:fusisoft@gmail.com">fusisoft@gmail.com</a></p>
-		</div>
-
-		<!-- Logo and Company Info Section -->
-		<div class="logo-container">
-			<img src="images/Logo-principal.jpg" alt="Fusisoft Logo">
+			<p><strong>Have a Project?</strong> Contact Us Below:</p>
+			<p><a href="contact.jsp">Submit Your Project Details</a></p>
 		</div>
 
 		<!-- Footer Section -->
 		<footer>
-			<p>Fusisoft Technologies - Your Partner in IT Innovation & Excellence</p>
+			<p>Fusisoft Technologies - Innovating IT Solutions for the Future</p>
 			<small>&copy; 2024 <a href="http://fusisoft.com" target="_blank">Fusisoft Technologies</a></small>
 		</footer>
+
 	</body>
 
 	</html>

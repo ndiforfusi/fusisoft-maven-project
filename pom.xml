@@ -1,15 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>com.mt</groupId>
 	<artifactId>maven-web-application</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1</version>
-	
-	<name>maven-web-application</name>
 
+	<name>maven-web-application</name>
 	<description>Maven Web Project for Java Project</description>
+
 	<organization>
 		<name>Fusisoft Technologies</name>
 		<url>http://fusisofttechnologies.com/</url>
@@ -20,42 +20,42 @@
 		<spring.version>5.1.2.RELEASE</spring.version>
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.17</log4j.version>
-
-	
-		<sonar.host.url>http://44.227.172.174:9000/</sonar.host.url>
-                 
-                <sonar.login>sqp_9e7de9d43df91ec5831d3090a1762e8dd67eae93</sonar.login>
-		<!-- <sonar.login>admin</sonar.login>
-		    <sonar.password>admin</sonar.password>
-                 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
 	</properties>
 
 	<dependencies>
-		
+
+		<!-- SLF4J API -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.36</version>
+		</dependency>
+
+		<!-- SLF4J Binding for Logback -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.11</version>
+		</dependency>
+
+		<!-- JSON Dependency -->
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20160212</version>
 		</dependency>
-		
-		<!-- test dependencies -->
+
+		<!-- JUnit for Testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 
-	<!--	<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
-		</dependency>
-           -->
+		<!-- Mockito for Unit Testing -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
@@ -63,18 +63,17 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- compile dependencies -->
-
+		<!-- Spring Core Dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
-    		<groupId>org.springframework</groupId>
-    		<artifactId>spring-web</artifactId>
-    		<version>${spring.version}</version>
-  		</dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -85,37 +84,32 @@
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
-		<!-- provided dependencies -->
 
+		<!-- Servlet API (Provided by Container) -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
-	</dependencies>
-	
-	<distributionManagement>
 
-		
-	    <repository>
-	      <id>nexus</id>
-	      <name>fusisoft Technologies Releases Nexus Repository</name>
-	      <url>http://3.17.74.149:8081/repository/ebay-releases/</url>
-	    </repository>
-	    
-	    <snapshotRepository>
-	      <id>nexus</id>
-	      <name>fusisosft Technologies Snapshot Nexus Repository </name>
-	      <url>http://3.17.74.149:8081/repository/ebay-snapshots/</url>
-	    </snapshotRepository>
+	</dependencies>
+
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>fusisoft Technologies Releases Nexus Repository</name>
+			<url>http://3.17.74.149:8081/repository/ebay-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus</id>
+			<name>fusisoft Technologies Snapshot Nexus Repository</name>
+			<url>http://3.17.74.149:8081/repository/ebay-snapshots/</url>
+		</snapshotRepository>
 	</distributionManagement>
-	
+
 	<build>
 		<finalName>myapps</finalName>
-		
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -126,7 +120,6 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
@@ -138,13 +131,11 @@
 					</webApp>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.9.1.2184</version>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -156,9 +147,7 @@
 					<wtpContextName>maven-web-application</wtpContextName>
 				</configuration>
 			</plugin>
-			
-</plugins>
+		</plugins>
 	</build>
-	
-	
 </project>
+

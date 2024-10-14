@@ -9,7 +9,7 @@ public class HomeController {
 
     @RequestMapping("/home")
     public ModelAndView showHomePage() {
-        // Refers to /WEB-INF/jsps/home.jsp
-        return new ModelAndView("home");
+        return new ModelAndView("home");  // Refers to WEB-INF/jsps/home.jsp
     }
 }
+

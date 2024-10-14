@@ -6,8 +6,8 @@
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- Component Scan for Controllers -->
-    <context:component-scan base-package="com.mt.services" />
+    <!-- Component Scan for Controllers and Services -->
+    <context:component-scan base-package="com.mt" />
 
     <!-- View Resolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -15,5 +15,7 @@
         <property name="suffix" value=".jsp" />
     </bean>
 </beans>
+
+
 
 

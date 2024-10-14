@@ -9,7 +9,8 @@ public class HomeController {
 
     @GetMapping("/services/home")
     public ModelAndView homePage() {
-        return new ModelAndView("home"); // This maps to /WEB-INF/jsps/home.jsp
+        return new ModelAndView("home");  // Points to /WEB-INF/jsps/home.jsp
     }
 }
+
 

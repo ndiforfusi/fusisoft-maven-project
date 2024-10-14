@@ -23,44 +23,21 @@
         <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
 
-    <!-- Login Controller Servlet -->
-    <servlet>
-        <servlet-name>LoginController</servlet-name>
-        <servlet-class>com.mt.services.LoginController</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>LoginController</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-
-    <!-- Logout Controller Servlet -->
-    <servlet>
-        <servlet-name>LogoutController</servlet-name>
-        <servlet-class>com.mt.services.LogoutController</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>LogoutController</servlet-name>
-        <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-
-    <!-- Error Handling -->
-    <error-page>
-        <error-code>500</error-code>
-        <location>/jsps/error.jsp</location>
-    </error-page>
+    <welcome-file-list>
+        <welcome-file>jsps/home.jsp</welcome-file>
+    </welcome-file-list>
 
     <error-page>
         <error-code>404</error-code>
         <location>/jsps/error.jsp</location>
     </error-page>
 
-    <!-- Welcome Page -->
-    <welcome-file-list>
-        <welcome-file>jsps/home.jsp</welcome-file>
-    </welcome-file-list>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/jsps/error.jsp</location>
+    </error-page>
 </web-app>
+
 
 
 

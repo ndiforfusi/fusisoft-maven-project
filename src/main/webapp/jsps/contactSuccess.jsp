@@ -4,7 +4,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Submission Successful</title>
+        <title>Contact Submission Successful</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -13,24 +13,18 @@
             }
 
             h2 {
-                color: #28a745;
-            }
-
-            a {
-                text-decoration: none;
                 color: #003366;
             }
 
-            a:hover {
-                text-decoration: underline;
+            p {
+                margin-top: 20px;
             }
         </style>
     </head>
 
     <body>
-        <h2>Thank you!</h2>
-        <p>Your submission has been received. We will get back to you shortly.</p>
-        <a href="home.jsp">Back to Home</a>
+        <h2>Thank You!</h2>
+        <p>Your contact details have been submitted successfully. We will get in touch with you shortly.</p>
     </body>
 
     </html>

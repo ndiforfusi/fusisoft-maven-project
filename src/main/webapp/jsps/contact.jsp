@@ -50,7 +50,7 @@
 
     <body>
         <h2>Contact Us</h2>
-        <form action="/contact/submitContact" method="post">
+        <form action="${pageContext.request.contextPath}/services/contact" method="post">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required />
 
@@ -60,8 +60,8 @@
             <label for="email">Email Address:</label>
             <input type="email" id="email" name="email" required />
 
-            <label for="project">Project Details:</label>
-            <textarea id="project" name="project" rows="5" required></textarea>
+            <label for="message">Project Details:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
 
             <input type="submit" value="Submit" />
         </form>

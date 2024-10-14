@@ -51,10 +51,16 @@
         <location>/jsps/error.jsp</location>
     </error-page>
 
-    <!-- JSP default mapping -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsps/error.jsp</location>
+    </error-page>
+
+    <!-- Welcome Page -->
     <welcome-file-list>
-        <welcome-file>/jsps/home.jsp</welcome-file>
+        <welcome-file>jsps/home.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
+
 
 

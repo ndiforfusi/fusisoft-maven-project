@@ -8,8 +8,8 @@
         <style>
             body {
                 font-family: Arial, sans-serif;
-                padding: 20px;
                 text-align: center;
+                padding: 20px;
             }
 
             h2 {
@@ -20,8 +20,7 @@
 
     <body>
         <h2>Thank You!</h2>
-        <p>Your contact details have been submitted successfully. We will get in touch with you shortly.</p>
-        <p><a href="${pageContext.request.contextPath}/services/contact">Back to Contact Form</a></p>
+        <p>Your contact details have been submitted successfully. We will get in touch soon.</p>
     </body>
 
     </html>

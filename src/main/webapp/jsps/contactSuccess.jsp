@@ -4,7 +4,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Contact Submission Successful</title>
+        <title>Contact Success</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -14,10 +14,6 @@
 
             h2 {
                 color: #003366;
-            }
-
-            p {
-                margin-top: 20px;
             }
         </style>
     </head>

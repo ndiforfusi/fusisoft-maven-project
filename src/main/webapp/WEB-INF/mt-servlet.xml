@@ -3,19 +3,41 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!-- Enable component scanning -->
+    <!-- Enable component scanning for controllers and other beans -->
     <context:component-scan base-package="com.mt.controllers" />
 
-    <!-- View Resolver -->
+    <!-- Enable Spring MVC annotation-driven configuration -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
+
+    <!-- View Resolver to map JSP pages -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsps/" />
         <property name="suffix" value=".jsp" />
     </bean>
 
+    <!-- Configure UTF-8 Character Encoding -->
+    <bean id="characterEncodingFilter" class="org.springframework.web.filter.CharacterEncodingFilter">
+        <property name="encoding" value="UTF-8" />
+        <property name="forceEncoding" value="true" />
+    </bean>
+
+    <!-- Add the encoding filter to the servlet filter chain -->
+    <bean id="filterRegistrationBean" class="org.springframework.boot.web.servlet.FilterRegistrationBean">
+        <property name="filter" ref="characterEncodingFilter" />
+        <property name="urlPatterns">
+            <list>
+                <value>/*</value>
+            </list>
+        </property>
+    </bean>
+
 </beans>
+
 
 
 

@@ -21,6 +21,7 @@
     <body>
         <h2>Thank You!</h2>
         <p>Your contact details have been submitted successfully. We will get in touch with you shortly.</p>
+        <p><a href="${pageContext.request.contextPath}/services/contact">Back to Contact Form</a></p>
     </body>
 
     </html>

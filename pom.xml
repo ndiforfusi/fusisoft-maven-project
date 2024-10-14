@@ -18,8 +18,8 @@
 
     <properties>
         <jdk.version>1.8</jdk.version>
-        <spring.version>5.1.2.RELEASE</spring.version>
-        <junit.version>4.11</junit.version>
+        <spring.version>5.3.9</spring.version>  <!-- Use a newer version for stability -->
+        <junit.version>4.13.2</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -59,43 +59,95 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>1.9.5</version>
+            <version>3.11.2</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- Spring Core Dependencies -->
+        <!-- Spring Core -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- Spring Web Dependency -->
+        <!-- Spring Web (Includes @RequestParam) -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- Spring WebMVC Dependency -->
+        <!-- Spring Web MVC -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- Spring Context Dependency -->
+        <!-- Spring Context -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- Servlet API (Provided by Container) -->
+        <!-- Servlet API (Provided by the container) -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- PostgreSQL JDBC Driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.5</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>myapps</finalName>
+        <plugins>
+            <!-- Maven Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+
+            <!-- Jetty Plugin for Local Testing -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.44.v20210927</version>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/maven-web-application</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
+
+            <!-- Maven WAR Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <webappDirectory>src/main/webapp</webappDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+
 
 
 

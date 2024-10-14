@@ -23,7 +23,7 @@
         <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
 
-    <!-- Login Servlet -->
+    <!-- Login Controller Servlet -->
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>com.mt.services.LoginController</servlet-class>
@@ -34,7 +34,7 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
-    <!-- Logout Servlet -->
+    <!-- Logout Controller Servlet -->
     <servlet>
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>com.mt.services.LogoutController</servlet-class>
@@ -55,6 +55,6 @@
     <welcome-file-list>
         <welcome-file>/jsps/home.jsp</welcome-file>
     </welcome-file-list>
-
 </web-app>
+
 

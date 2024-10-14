@@ -7,11 +7,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
-    @GetMapping("/home")
+    @GetMapping("/services/home")
     public ModelAndView homePage() {
-        return new ModelAndView("home"); // Maps to /WEB-INF/jsps/home.jsp
+        return new ModelAndView("home"); // This maps to /WEB-INF/jsps/home.jsp
     }
 }
-
-
 

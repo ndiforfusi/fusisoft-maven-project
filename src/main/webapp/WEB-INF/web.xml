@@ -6,7 +6,7 @@
 
     <display-name>Fusisoft Web Application</display-name>
 
-    <!-- Dispatcher Servlet for Spring Controllers -->
+    <!-- Spring Dispatcher Servlet -->
     <servlet>
         <servlet-name>spring</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -24,12 +24,11 @@
 
     <!-- Error Handling -->
     <error-page>
-        <error-code>500</error-code>
+        <error-code>404</error-code>
         <location>/jsps/error.jsp</location>
     </error-page>
-
     <error-page>
-        <error-code>404</error-code>
+        <error-code>500</error-code>
         <location>/jsps/error.jsp</location>
     </error-page>
 
@@ -38,6 +37,7 @@
         <welcome-file>jsps/home.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
+
 
 
 

@@ -6,20 +6,14 @@
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- Enable Component Scanning -->
-    <context:component-scan base-package="com.mt.controllers" />
+    <!-- Component Scan for Controllers -->
+    <context:component-scan base-package="com.mt.services" />
 
-    <!-- View Resolver Configuration -->
+    <!-- View Resolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsps/" />
         <property name="suffix" value=".jsp" />
     </bean>
-
-    <!-- Character Encoding Filter Configuration -->
-    <bean id="characterEncodingFilter" class="org.springframework.web.filter.CharacterEncodingFilter">
-        <property name="encoding" value="UTF-8" />
-        <property name="forceEncoding" value="true" />
-    </bean>
-
 </beans>
+
 

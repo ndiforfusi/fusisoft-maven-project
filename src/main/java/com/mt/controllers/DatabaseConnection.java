@@ -5,11 +5,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/ddsonarqube";
-    private static final String USER = "yourUsername";
-    private static final String PASSWORD = "yourPassword";
+    private static final String URL = System.getenv("DB_URL");
+    private static final String USER = System.getenv("DB_USER");
+    private static final String PASSWORD = System.getenv("DB_PASSWORD");
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        if (URL == null || USER == null || PASSWORD == null) {
+            throw new IllegalStateException("Database credentials not set in environment variables");
+        }
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
+
+

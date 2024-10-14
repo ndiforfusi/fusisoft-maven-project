@@ -19,7 +19,7 @@
         <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
 
-    <!-- Register Character Encoding Filter -->
+    <!-- Character Encoding Filter -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -38,9 +38,9 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!-- Welcome Page Configuration -->
+    <!-- Welcome Page -->
     <welcome-file-list>
-        <welcome-file>/jsps/home.jsp</welcome-file>
+        <welcome-file>jsps/home.jsp</welcome-file>
     </welcome-file-list>
 
     <!-- Error Handling -->
@@ -53,7 +53,9 @@
         <error-code>500</error-code>
         <location>/jsps/error.jsp</location>
     </error-page>
+
 </web-app>
+
 
 
 

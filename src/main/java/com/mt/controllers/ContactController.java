@@ -11,16 +11,15 @@ import org.slf4j.LoggerFactory;
 @Controller
 public class ContactController {
 
-    // Logger instance for logging
     private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
 
-    // Handle GET requests to display the contact form
+    // Display the contact form
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public String showContactForm() {
-        return "contact";  // Renders contact.jsp
+        return "contact";  // Maps to contact.jsp in /WEB-INF/jsps/
     }
 
-    // Handle POST requests to submit contact details
+    // Handle form submission
     @RequestMapping(value = "/contact", method = RequestMethod.POST)
     public String submitContactDetails(
             @RequestParam("name") String name,
@@ -29,25 +28,18 @@ public class ContactController {
             @RequestParam("message") String message,
             Model model) {
         try {
-            // Log the submission details
             logger.info("Received contact from: {} with email: {} and phone: {}", name, email, phone);
 
-            // Add the name to the model to pass to the success page
             model.addAttribute("name", name);
 
-            // Redirect to the success page (PRG pattern)
+            // Redirect to success page
             return "redirect:/services/contactSuccess";
         } catch (Exception e) {
-            // Log any error
             logger.error("Error processing contact submission for: {}", name, e);
 
-            // Add an error message to the model and reload the form
             model.addAttribute("errorMessage", "We couldn't process your submission. Please try again.");
-            return "contact";  // Reloads contact.jsp with an error message
+            return "contact";  // Reload contact.jsp with an error message
         }
     }
 }
-
-
-
 

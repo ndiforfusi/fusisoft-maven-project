@@ -1,4 +1,4 @@
-package com.mt.services;
+package com.mt.controllers;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -15,8 +15,8 @@ import com.mt.utils.DatabaseConnection;
 
 public class LoginController extends HttpServlet {
 
-    private static final String DEFAULT_PASSWORD = "Sch00l@12";
-    private static final String ADMIN_EMAIL = "fusisoft@gmail.com";
+    private static final String ADMIN_EMAIL = System.getenv("ADMIN_EMAIL");
+    private static final String DEFAULT_PASSWORD = System.getenv("ADMIN_PASSWORD");
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
@@ -46,39 +46,15 @@ public class LoginController extends HttpServlet {
             if (rs.next()) {
                 String storedPassword = rs.getString("password");
                 return storedPassword.equals(password);
-            } else if (ADMIN_EMAIL.equals(email) && DEFAULT_PASSWORD.equals(password)) {
+            } else if (ADMIN_EMAIL != null && ADMIN_EMAIL.equals(email) && 
+                       DEFAULT_PASSWORD != null && DEFAULT_PASSWORD.equals(password)) {
                 return true;
             }
         }
         return false;
     }
-
-    // Handle password reset request
-    @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String newPassword = request.getParameter("newPassword");
-
-        try (Connection conn = DatabaseConnection.getConnection()) {
-            if (resetPassword(ADMIN_EMAIL, newPassword, conn)) {
-                response.sendRedirect("jsps/login.jsp?resetSuccess=true");
-            } else {
-                response.sendRedirect("jsps/error.jsp");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            response.sendRedirect("jsps/error.jsp");
-        }
-    }
-
-    private boolean resetPassword(String email, String newPassword, Connection conn) throws SQLException {
-        String updateQuery = "UPDATE contact SET password = ? WHERE email = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(updateQuery)) {
-            stmt.setString(1, newPassword);
-            stmt.setString(2, email);
-            return stmt.executeUpdate() > 0;
-        }
-    }
 }
+
+
 
 

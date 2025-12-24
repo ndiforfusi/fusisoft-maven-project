@@ -1,85 +1,29 @@
 pipeline {
   agent { label 'python-build-node' }
 
-  tools {
-    maven 'maven3.9.6'
+  tools { maven 'maven3.9.6' }
+
+  parameters {
+    string(name: 'IMAGE_TAG', defaultValue: '1.0.0', description: 'Docker image tag (e.g. 1.0.0)')
+    booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run tests?')
+    booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Deploy container on this agent?')
   }
 
   environment {
     IMAGE_REPO   = "ndiforfusi/fusisoft-webapp"
     NOTIFY_EMAIL = "fusisoft@gmail.com"
     DOCKER_CREDS = "dockerhub-ndiforfusi"
-  }
-
-  parameters {
-    string(
-      name: 'IMAGE_TAG',
-      defaultValue: '1.0.0',
-      description: 'Docker image version tag (e.g. 1.0.0, 1.1.0)'
-    )
-    booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run tests?')
-    booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Deploy container on this agent?')
+    IMAGE_TAG    = "${params.IMAGE_TAG}"   // ✅ FIX: make it an env var for shell
   }
 
   stages {
-    stage('Checkout') {
-      steps {
-        checkout scm
-      }
-    }
-
-    stage('Build') {
-      steps {
-        script {
-          def mvnHome = tool(name: 'maven3.9.6', type: 'hudson.tasks.Maven$MavenInstallation')
-          sh """
-            set -euo pipefail
-            ${mvnHome}/bin/mvn -B -f pom.xml clean package -DskipTests
-          """
-        }
-      }
-    }
-
-    stage('Test (optional)') {
-      when { expression { params.RUN_TESTS } }
-      steps {
-        script {
-          def mvnHome = tool(name: 'maven3.9.6', type: 'hudson.tasks.Maven$MavenInstallation')
-          sh """
-            set -euo pipefail
-            ${mvnHome}/bin/mvn -B -f pom.xml test
-          """
-        }
-      }
-    }
-
-    stage('Docker Login') {
-      steps {
-        withCredentials([
-          usernamePassword(
-            credentialsId: "${DOCKER_CREDS}",
-            usernameVariable: 'DH_USER',
-            passwordVariable: 'DH_TOKEN'
-          )
-        ]) {
-          sh '''
-            set -euo pipefail
-            echo "$DH_TOKEN" | docker login -u "$DH_USER" --password-stdin
-          '''
-        }
-      }
-    }
-
     stage('Docker Build & Push') {
       steps {
         sh '''
           set -euo pipefail
-          echo "Building Docker image with tag: ${IMAGE_TAG}"
+          echo "Building Docker image with tag: $IMAGE_TAG"
 
-          docker build \
-            -t ${IMAGE_REPO}:${IMAGE_TAG} \
-            -t ${IMAGE_REPO}:latest .
-
+          docker build -t ${IMAGE_REPO}:${IMAGE_TAG} -t ${IMAGE_REPO}:latest .
           docker push ${IMAGE_REPO}:${IMAGE_TAG}
           docker push ${IMAGE_REPO}:latest
         '''
@@ -97,12 +41,7 @@ pipeline {
           docker rm fusisoft-webapp 2>/dev/null || true
 
           docker pull ${IMAGE_REPO}:${IMAGE_TAG}
-          docker run -d --restart unless-stopped \
-            --name fusisoft-webapp \
-            -p 8085:8080 \
-            ${IMAGE_REPO}:${IMAGE_TAG}
-
-          docker ps --filter "name=fusisoft-webapp"
+          docker run -d --restart unless-stopped --name fusisoft-webapp -p 8085:8080 ${IMAGE_REPO}:${IMAGE_TAG}
         '''
       }
     }

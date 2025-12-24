@@ -1,0 +1,44 @@
+node('java-build-node') {
+
+  def version = '1.1.0'
+  def runTests = true
+
+  stage('Checkout') {
+    checkout scm
+  }
+
+  stage('Build') {
+    if (env.BRANCH_NAME == 'dev') {
+      sh 'mvn -B clean package -DskipTests'
+      echo "Built version: ${version}"
+    } else {
+      echo "Skipping build (not dev)"
+    }
+  }
+
+  stage('Test') {
+    if (runTests && (env.BRANCH_NAME == 'dev' || env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'master')) {
+      sh 'mvn -B test'
+      withCredentials([usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
+        echo "Credentials loaded for demo. USER=$USER"
+      }
+    } else {
+      echo "Skipping tests"
+    }
+  }
+
+  stage('Deploy') {
+    if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'master') {
+      sh """
+        set -e
+        docker stop fusisoft-webapps || true
+        docker rm fusisoft-webapps || true
+        docker rmi fusisoft-webapps:${version} || true
+        docker build -t fusisoft-webapps:${version} .
+        docker run -d --name fusisoft-webapps -p 8085:8080 fusisoft-webapps:${version}
+      """
+    } else {
+      echo "Skipping deploy (not main/master)"
+    }
+  }
+}

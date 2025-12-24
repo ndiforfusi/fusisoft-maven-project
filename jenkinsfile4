@@ -9,19 +9,19 @@ pipeline{
     string(name: 'APP_VERSION', defaultValue: '1.0.0', description: 'Version to build/deploy')
 }
   stages {
-    stage(1. 'Git checkout'){
+    stage('1. Git checkout'){
      steps { checkout scm } 
     }
-    stage(2. 'Build Stage'){
+    stage('2. Build Stage'){
      steps { sh 'mvn clean package' } 
     }
-    stage(3. 'Test Stage'){
+    stage('3. Test Stage'){
      steps { sh 'echo "testing built artifact"' } 
     }
-    stage(4. 'Archive Stage'){
+    stage('4. Archive Stage'){
        steps { sh 'echo "archiving artifact"' } 
       }
-    stage(5. 'Deploy Stage'){
+    stage('5. Deploy Stage'){
        steps { sh 'echo "Deploying application"' } 
       }
   }

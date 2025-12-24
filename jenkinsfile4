@@ -1,5 +1,13 @@
 pipeline{
   agent { label 'java-build-agent'}
+  options {
+     timestamps()  
+     ansiColor('xterm') }
+  parameters {
+    choice(name: 'ENV', choices: ['dev', 'qa','uat','prod'], description: 'Target environment')
+    booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run unit tests?')
+    string(name: 'APP_VERSION', defaultValue: '1.0.0', description: 'Version to build/deploy')
+}
   stages {
     stage(1. Git checkout){
      steps { checkout scm } 

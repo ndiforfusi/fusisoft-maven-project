@@ -1,6 +1,6 @@
 pipeline{
   agent { label 'java-build-agent'}
-  options { ansiColor('xterm') }
+  options { timestamps()  }
   parameters {
     choice(name: 'ENV', choices: ['dev', 'qa','uat','prod'], description: 'Target environment')
     booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run unit tests?')

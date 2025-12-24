@@ -11,7 +11,7 @@ pipeline{
      steps { checkout scm } 
     }
     stage('2. Build Stage'){
-     steps { sh 'mvn clean package' } 
+     steps { sh 'echo "build stage"' } 
     }
     stage('3. Test Stage'){
      steps { sh 'echo "testing built artifact"' } 

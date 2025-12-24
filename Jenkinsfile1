@@ -1,19 +1,24 @@
 pipeline {
-  agent {label 'python-build-node'}
+  agent { label 'python-build-node' }
 
   tools {
     maven 'maven3.9.6'
   }
 
   environment {
-    IMAGE_REPO    = "ndiforfusi/fusisoft-webapp"
-    NOTIFY_EMAIL  = "fusisoft@gmail.com"
-    DOCKER_CREDS  = "dockerhub-ndiforfusi"   // <-- Jenkins credentials ID
+    IMAGE_REPO   = "ndiforfusi/fusisoft-webapp"
+    NOTIFY_EMAIL = "fusisoft@gmail.com"
+    DOCKER_CREDS = "dockerhub-ndiforfusi"
   }
 
   parameters {
+    string(
+      name: 'IMAGE_TAG',
+      defaultValue: '1.0.0',
+      description: 'Docker image version tag (e.g. 1.0.0, 1.1.0)'
+    )
     booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run tests?')
-    booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Run container on this agent?')
+    booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Deploy container on this agent?')
   }
 
   stages {
@@ -25,21 +30,42 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh 'mvn -B clean package -DskipTests'
+        script {
+          def mvnHome = tool(name: 'maven3.9.6', type: 'hudson.tasks.Maven$MavenInstallation')
+          sh """
+            set -euo pipefail
+            ${mvnHome}/bin/mvn -B -f pom.xml clean package -DskipTests
+          """
+        }
       }
     }
 
     stage('Test (optional)') {
-      when { expression { return params.RUN_TESTS } }
+      when { expression { params.RUN_TESTS } }
       steps {
-        sh 'mvn -B test'
+        script {
+          def mvnHome = tool(name: 'maven3.9.6', type: 'hudson.tasks.Maven$MavenInstallation')
+          sh """
+            set -euo pipefail
+            ${mvnHome}/bin/mvn -B -f pom.xml test
+          """
+        }
       }
     }
 
     stage('Docker Login') {
       steps {
-        withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDS}", usernameVariable: 'DH_USER', passwordVariable: 'DH_TOKEN')]) {
-          sh 'echo "$DH_TOKEN" | docker login -u "$DH_USER" --password-stdin'
+        withCredentials([
+          usernamePassword(
+            credentialsId: "${DOCKER_CREDS}",
+            usernameVariable: 'DH_USER',
+            passwordVariable: 'DH_TOKEN'
+          )
+        ]) {
+          sh '''
+            set -euo pipefail
+            echo "$DH_TOKEN" | docker login -u "$DH_USER" --password-stdin
+          '''
         }
       }
     }
@@ -48,26 +74,33 @@ pipeline {
       steps {
         sh '''
           set -euo pipefail
-          TAG="${BUILD_NUMBER}"
-          docker build -t ${IMAGE_REPO}:${TAG} -t ${IMAGE_REPO}:latest .
-          docker push ${IMAGE_REPO}:${TAG}
+          echo "Building Docker image with tag: ${IMAGE_TAG}"
+
+          docker build \
+            -t ${IMAGE_REPO}:${IMAGE_TAG} \
+            -t ${IMAGE_REPO}:latest .
+
+          docker push ${IMAGE_REPO}:${IMAGE_TAG}
           docker push ${IMAGE_REPO}:latest
         '''
       }
     }
 
     stage('Deploy (optional)') {
-      when { expression { return params.DEPLOY } }
+      when { expression { params.DEPLOY } }
       steps {
         sh '''
           set -euo pipefail
-          TAG="${BUILD_NUMBER}"
+          echo "Deploying image: ${IMAGE_REPO}:${IMAGE_TAG}"
 
           docker stop fusisoft-webapp 2>/dev/null || true
           docker rm fusisoft-webapp 2>/dev/null || true
 
-          docker pull ${IMAGE_REPO}:${TAG}
-          docker run -d --restart unless-stopped --name fusisoft-webapp -p 8085:8080 ${IMAGE_REPO}:${TAG}
+          docker pull ${IMAGE_REPO}:${IMAGE_TAG}
+          docker run -d --restart unless-stopped \
+            --name fusisoft-webapp \
+            -p 8085:8080 \
+            ${IMAGE_REPO}:${IMAGE_TAG}
 
           docker ps --filter "name=fusisoft-webapp"
         '''
@@ -77,34 +110,27 @@ pipeline {
 
   post {
     success {
-      emailext(
-        to: "${env.NOTIFY_EMAIL}",
-        subject: "✅ Jenkins SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-        mimeType: 'text/html',
-        body: """
-          <p><b>Status:</b> SUCCESS ✅</p>
-          <p><b>Job:</b> ${env.JOB_NAME}</p>
-          <p><b>Build:</b> #${env.BUILD_NUMBER}</p>
-          <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-          <p><b>Docker Image:</b> ${env.IMAGE_REPO}:${env.BUILD_NUMBER} (and :latest)</p>
-        """
-      )
+      mail to: "${env.NOTIFY_EMAIL}",
+           subject: "✅ Jenkins SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+           body: """\
+Status: SUCCESS ✅
+Job: ${env.JOB_NAME}
+Build: #${env.BUILD_NUMBER}
+Docker Image: ${env.IMAGE_REPO}:${params.IMAGE_TAG}
+Build URL: ${env.BUILD_URL}
+"""
     }
 
     failure {
-      emailext(
-        to: "${env.NOTIFY_EMAIL}",
-        subject: "❌ Jenkins FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-        mimeType: 'text/html',
-        body: """
-          <p><b>Status:</b> FAILED ❌</p>
-          <p><b>Job:</b> ${env.JOB_NAME}</p>
-          <p><b>Build:</b> #${env.BUILD_NUMBER}</p>
-          <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-          <p><b>Console:</b> <a href="${env.BUILD_URL}console">${env.BUILD_URL}console</a></p>
-          <p>Open the console output and search for <b>ERROR</b>.</p>
-        """
-      )
+      mail to: "${env.NOTIFY_EMAIL}",
+           subject: "❌ Jenkins FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+           body: """\
+Status: FAILED ❌
+Job: ${env.JOB_NAME}
+Build: #${env.BUILD_NUMBER}
+Docker Image: ${env.IMAGE_REPO}:${params.IMAGE_TAG}
+Console: ${env.BUILD_URL}console
+"""
     }
 
     always {
@@ -113,7 +139,4 @@ pipeline {
     }
   }
 }
-
-
-
 

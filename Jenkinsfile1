@@ -1,5 +1,5 @@
 pipeline {
-  agent {labels 'python-build-node'}
+  agent {label 'python-build-node'}
 
   tools {
     maven 'maven3.9.6'

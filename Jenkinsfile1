@@ -1,81 +1,119 @@
 pipeline {
-  agent { label 'java-build-node' }
-  tools { maven 'maven3.9.6' }
+  agent any
 
-  parameters {
-    choice(name: 'BUILD_VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: 'Select version for build/deploy')
-    booleanParam(name: 'EXECUTE_TESTS', defaultValue: true, description: 'Run unit tests?')
+  tools {
+    maven 'maven3.9.6'
   }
 
   environment {
-    NEW_VERSION = "${params.BUILD_VERSION}"
-    SERVER_CREDS = credentials('server-credentials')   // exposes SERVER_CREDS_USR and SERVER_CREDS_PSW
+    IMAGE_REPO    = "ndiforfusi/fusisoft-webapp"
+    NOTIFY_EMAIL  = "fusisoft@gmail.com"
+    DOCKER_CREDS  = "dockerhub-ndiforfusi"   // <-- Jenkins credentials ID
   }
 
-  tools {
-    maven 'maven3.8.6'
+  parameters {
+    booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run tests?')
+    booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Run container on this agent?')
   }
 
   stages {
     stage('Checkout') {
-      steps { checkout scm }
+      steps {
+        checkout scm
+      }
     }
 
     stage('Build') {
-      when { expression { return env.BRANCH_NAME == 'dev' } }
       steps {
         sh 'mvn -B clean package -DskipTests'
-        sh 'echo "Building version: ${NEW_VERSION}"'
       }
     }
 
-    stage('Test') {
-      when {
-        allOf {
-          expression { return params.EXECUTE_TESTS == true }
-          anyOf {
-            expression { return env.BRANCH_NAME == 'dev' }
-            expression { return env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'master' }
-          }
-        }
-      }
+    stage('Test (optional)') {
+      when { expression { return params.RUN_TESTS } }
       steps {
-        sh 'echo "Running tests..."'
         sh 'mvn -B test'
+      }
+    }
 
-        withCredentials([usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
-          sh 'echo "Credentials loaded (USER=$USER). Do NOT print passwords."'
-          // sh "some-script --user $USER --pass $PWD"
+    stage('Docker Login') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDS}", usernameVariable: 'DH_USER', passwordVariable: 'DH_TOKEN')]) {
+          sh 'echo "$DH_TOKEN" | docker login -u "$DH_USER" --password-stdin'
         }
       }
     }
 
-    stage('Deploy') {
-      when { expression { return env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'master' } }
+    stage('Docker Build & Push') {
       steps {
         sh '''
-          set -e
-          echo "Deploying version ${NEW_VERSION}..."
+          set -euo pipefail
+          TAG="${BUILD_NUMBER}"
+          docker build -t ${IMAGE_REPO}:${TAG} -t ${IMAGE_REPO}:latest .
+          docker push ${IMAGE_REPO}:${TAG}
+          docker push ${IMAGE_REPO}:latest
+        '''
+      }
+    }
 
-          docker stop fusisoft-webapps || true
-          docker rm fusisoft-webapps || true
+    stage('Deploy (optional)') {
+      when { expression { return params.DEPLOY } }
+      steps {
+        sh '''
+          set -euo pipefail
+          TAG="${BUILD_NUMBER}"
 
-          docker rmi fusisoft-webapps:${NEW_VERSION} || true
-          docker build -t fusisoft-webapps:${NEW_VERSION} .
+          docker stop fusisoft-webapp 2>/dev/null || true
+          docker rm fusisoft-webapp 2>/dev/null || true
 
-          docker run -d --name fusisoft-webapps -p 8085:8080 fusisoft-webapps:${NEW_VERSION}
-          echo "Deployment complete ✅"
+          docker pull ${IMAGE_REPO}:${TAG}
+          docker run -d --restart unless-stopped --name fusisoft-webapp -p 8085:8080 ${IMAGE_REPO}:${TAG}
+
+          docker ps --filter "name=fusisoft-webapp"
         '''
       }
     }
   }
 
   post {
-    success { echo '✅ Pipeline successful' }
-    failure { echo '❌ Pipeline failed' }
-    cleanup { cleanWs() }
+    success {
+      emailext(
+        to: "${env.NOTIFY_EMAIL}",
+        subject: "✅ Jenkins SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+        mimeType: 'text/html',
+        body: """
+          <p><b>Status:</b> SUCCESS ✅</p>
+          <p><b>Job:</b> ${env.JOB_NAME}</p>
+          <p><b>Build:</b> #${env.BUILD_NUMBER}</p>
+          <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+          <p><b>Docker Image:</b> ${env.IMAGE_REPO}:${env.BUILD_NUMBER} (and :latest)</p>
+        """
+      )
+    }
+
+    failure {
+      emailext(
+        to: "${env.NOTIFY_EMAIL}",
+        subject: "❌ Jenkins FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+        mimeType: 'text/html',
+        body: """
+          <p><b>Status:</b> FAILED ❌</p>
+          <p><b>Job:</b> ${env.JOB_NAME}</p>
+          <p><b>Build:</b> #${env.BUILD_NUMBER}</p>
+          <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+          <p><b>Console:</b> <a href="${env.BUILD_URL}console">${env.BUILD_URL}console</a></p>
+          <p>Open the console output and search for <b>ERROR</b>.</p>
+        """
+      )
+    }
+
+    always {
+      sh 'docker logout >/dev/null 2>&1 || true'
+      cleanWs()
+    }
   }
 }
+
 
 
 

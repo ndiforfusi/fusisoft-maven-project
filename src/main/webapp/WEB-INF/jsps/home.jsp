@@ -17,24 +17,29 @@
           <header class="hero glass">
             <div class="hero-bg" style="background-image:url('${heroImg}');"></div>
 
-            <h1>Modern IT engineering that delivers real outcomes.</h1>
+            <h1>Build. Secure. Scale.<br />Operate with confidence.</h1>
             <p>
-              We help organizations ship faster, operate reliably, and stay secure—through DevOps, SRE, DevSecOps,
-              Infrastructure as Code, and Cybersecurity solutions.
+              Fusisoft Technologies delivers modern IT engineering that accelerates delivery, increases reliability,
+              and embeds security into every phase—without sacrificing quality.
             </p>
 
             <div class="cta">
               <c:url var="contactUrl" value="/contact" />
-              <a class="btn btn-primary" href="${contactUrl}">Start a Project</a>
-              <c:url var="devopsUrl" value="/devops" />
-              <a class="btn btn-ghost" href="${devopsUrl}">Explore DevOps</a>
+              <a class="btn btn-primary" href="${contactUrl}">
+                <i class="fa-solid fa-rocket"></i> Start a Project
+              </a>
+
+              <c:url var="cyberUrl" value="/cybersecurity" />
+              <a class="btn btn-ghost" href="${cyberUrl}">
+                <i class="fa-solid fa-shield-halved"></i> Security First
+              </a>
             </div>
           </header>
 
-          <main class="grid" style="margin-top:18px;">
-            <section class="card">
-              <h2>Our Core Services</h2>
-              <p>Premium service pages with your imagery and a consistent brand design system.</p>
+          <main class="grid">
+            <section class="card glass">
+              <h2><i class="fa-solid fa-layer-group"></i> Our Core Services</h2>
+              <p>Explore the services we offer with a premium design system and consistent experience.</p>
 
               <div class="services">
                 <c:url var="devopsUrl" value="/devops" />
@@ -42,10 +47,12 @@
                 <div class="service-card">
                   <div class="service-cover" style="background-image:url('${devopsImg}');"></div>
                   <div class="service-content">
-                    <div class="service-pill">Delivery • Automation</div>
+                    <div class="service-pill"><i class="fa-solid fa-infinity"></i>&nbsp; Delivery • Automation</div>
                     <div class="service-title">DevOps Consulting</div>
-                    <div class="service-desc">CI/CD pipelines, cloud automation, and deployment acceleration.</div>
-                    <a class="service-link" href="${devopsUrl}">Learn more →</a>
+                    <div class="service-desc">CI/CD pipelines, automation, containerization, and faster releases.</div>
+                    <a class="service-link" href="${devopsUrl}">
+                      Learn more <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                   </div>
                 </div>
 
@@ -54,10 +61,12 @@
                 <div class="service-card">
                   <div class="service-cover" style="background-image:url('${sreImg}');"></div>
                   <div class="service-content">
-                    <div class="service-pill">Reliability • Observability</div>
-                    <div class="service-title">Site Reliability Engineering</div>
-                    <div class="service-desc">SLOs, monitoring, incident response, and resilient systems.</div>
-                    <a class="service-link" href="${sreUrl}">Learn more →</a>
+                    <div class="service-pill"><i class="fa-solid fa-heart-pulse"></i>&nbsp; Reliability</div>
+                    <div class="service-title">SRE</div>
+                    <div class="service-desc">SLOs, observability, incident response, resilience engineering.</div>
+                    <a class="service-link" href="${sreUrl}">
+                      Learn more <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                   </div>
                 </div>
 
@@ -66,10 +75,13 @@
                 <div class="service-card">
                   <div class="service-cover" style="background-image:url('${devsecopsImg}');"></div>
                   <div class="service-content">
-                    <div class="service-pill">Security • Compliance</div>
-                    <div class="service-title">DevSecOps Integration</div>
-                    <div class="service-desc">Security embedded into the pipeline—secure by design.</div>
-                    <a class="service-link" href="${devsecopsUrl}">Learn more →</a>
+                    <div class="service-pill"><i class="fa-solid fa-shield-halved"></i>&nbsp; Security • Compliance
+                    </div>
+                    <div class="service-title">DevSecOps</div>
+                    <div class="service-desc">Shift-left security and compliance as code across your pipeline.</div>
+                    <a class="service-link" href="${devsecopsUrl}">
+                      Learn more <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                   </div>
                 </div>
 
@@ -78,50 +90,47 @@
                 <div class="service-card">
                   <div class="service-cover" style="background-image:url('${iacImg}');"></div>
                   <div class="service-content">
-                    <div class="service-pill">Terraform • Automation</div>
+                    <div class="service-pill"><i class="fa-solid fa-code"></i>&nbsp; Terraform • Automation</div>
                     <div class="service-title">Infrastructure as Code</div>
-                    <div class="service-desc">Repeatable environments with IaC and governance.</div>
-                    <a class="service-link" href="${iacUrl}">Learn more →</a>
+                    <div class="service-desc">Repeatable environments, drift control, and governed automation.</div>
+                    <a class="service-link" href="${iacUrl}">
+                      Learn more <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                   </div>
                 </div>
 
-                <c:url var="cyberUrl" value="/cybersecurity" />
+                <c:url var="cyberUrl2" value="/cybersecurity" />
                 <c:url var="cyberImg" value="/images/cybersecurity.jpg" />
                 <div class="service-card" style="grid-column:1 / -1;">
                   <div class="service-cover" style="background-image:url('${cyberImg}');"></div>
                   <div class="service-content">
-                    <div class="service-pill">Threat • Defense</div>
-                    <div class="service-title">Cybersecurity Solutions</div>
-                    <div class="service-desc">Vulnerability reduction, IAM hardening, and incident readiness.</div>
-                    <a class="service-link" href="${cyberUrl}">Learn more →</a>
+                    <div class="service-pill"><i class="fa-solid fa-user-shield"></i>&nbsp; Threat • Defense</div>
+                    <div class="service-title">Cybersecurity</div>
+                    <div class="service-desc">Hardening, IAM, scanning, threat detection, and incident readiness.</div>
+                    <a class="service-link" href="${cyberUrl2}">
+                      Learn more <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                   </div>
                 </div>
-
               </div>
             </section>
 
-            <aside class="card">
-              <h2>Why Fusisoft?</h2>
-              <p>We build systems that can be run and supported confidently long-term.</p>
+            <aside class="card glass">
+              <h2><i class="fa-solid fa-star"></i> Why Fusisoft?</h2>
+              <p>Modern engineering, measurable outcomes, and operational excellence.</p>
 
-              <div class="alert">
-                <strong>Fast delivery</strong><br />
-                Automation-first approach to reduce manual work and human error.
-              </div>
-
-              <div class="alert" style="margin-top:12px;">
-                <strong>Reliable operations</strong><br />
-                Observability, SLOs, and incident patterns that reduce downtime.
-              </div>
-
-              <div class="alert" style="margin-top:12px;">
-                <strong>Security built-in</strong><br />
-                Shift-left security and compliance as code.
-              </div>
+              <div class="alert"><strong><i class="fa-solid fa-bolt"></i> Faster delivery</strong><br />Reduce manual
+                work and speed up releases.</div>
+              <div class="alert" style="margin-top:12px;"><strong><i class="fa-solid fa-chart-line"></i> Reliable
+                  operations</strong><br />SLOs + observability that reduces downtime.</div>
+              <div class="alert" style="margin-top:12px;"><strong><i class="fa-solid fa-lock"></i> Security
+                  built-in</strong><br />Shift-left controls and hardened runtime.</div>
 
               <div class="cta" style="margin-top:14px;">
                 <c:url var="contactUrl" value="/contact" />
-                <a class="btn btn-primary" href="${contactUrl}">Contact Us</a>
+                <a class="btn btn-primary" href="${contactUrl}">
+                  <i class="fa-solid fa-envelope"></i> Contact Us
+                </a>
               </div>
             </aside>
           </main>

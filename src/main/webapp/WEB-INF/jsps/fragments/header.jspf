@@ -13,11 +13,12 @@
 <c:url var="iacUrl" value="/iac"/>
 <c:url var="cyberUrl" value="/cybersecurity"/>
 <c:url var="loginUrl" value="/login"/>
-<c:url var="dashboardUrl" value="/dashboard"/>
+
+<c:url var="logoMain" value="/images/Logo-principal.jpg"/>
 
 <div class="topbar">
   <a class="brand" href="${homeUrl}">
-    <span class="brand-mark" aria-hidden="true">F</span>
+    <img src="${logoMain}" alt="Fusisoft Logo"/>
     <span>
       Fusisoft Technologies
       <small>IT Consulting & Engineering</small>

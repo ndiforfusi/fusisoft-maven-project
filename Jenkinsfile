@@ -1,41 +1,73 @@
 pipeline {
-agent any
-tools {
-    maven 'maven3.8.6'
+    agent { node { label "maven-sonarqube-node" } }   
+    parameters {
+      choice(name: 'aws_account',choices: ['999568710647', '4568366404742', '922266408974','576900672829'], description: 'aws account hosting image registry')
+      choice(name: 'Environment', choices: ['Dev', 'QA', 'UAT', 'Prod'], description: 'Target environment for deployment')
+      string(name: 'ecr_tag', defaultValue: '1.31.0', description: 'Assign the ECR tag version for the build')
     }
+
+    tools {
+      maven "Maven-3.9.8"
+    }
+
     stages {
-      stage('1. Build with maven') { 
-        steps{
-          sh "mvn clean package"
-         }
-       }
-      stage('2. SonarQube analysis') {
-//    def scannerHome = tool 'SonarScanner 4.0';
-        steps{
-        withSonarQubeEnv('sonarqube-8.9.10') { 
-        // If you have configured more than one global server connection, you can specify its name
-//      sh "${scannerHome}/bin/sonar-scanner"
-        sh "mvn sonar:sonar"
-        }
-        }
-       }
-      stage('3. Deploy to a Docker container') {
-         steps{
-          sh "docker stop fusisoft-webapps;docker rm fusisoft-webapps;docker rmi fusisoft-webapps:1.1.0;docker build -t fusisoft-webapps:1.1.0 .;docker run -itd --name=fusisoft-webapps -p 8085:8080 fusisoft-webapps:1.1.0"
-         }
-       }
-      stage ('4. Email Notification') {
-         steps{
-         mail bcc: 'fusisoft@gmail.com', body: '''Build is Over. check application on. 
-         http://3.143.231.151:8085/myapps/
-         Check the website URL for latest changes.
-         Let me know if the changes look okay.
-         Thanks,
-         Fusisoft Technologies,
-         +1 (313) 413-1477''', cc: 'fusisoft@gmail.com', from: '', replyTo: '', subject: 'Application was Successfully Deployed!!', to: 'fusisoft@gmail.com'
+    stage('1. Git Checkout') {
+      steps {
+        git branch: 'release', credentialsId: 'github-maven-webapp-pat', url: 'https://github.com/ndiforfusi/fusisoft-maven-project.git'
       }
     }
- }
+    stage('2. Build with Maven') { 
+      steps {
+        sh "mvn clean package"
+      }
+    }
+    stage('3. SonarQube Analysis') {
+          environment {
+                scannerHome = tool 'SonarQube-Scanner-6.2.1'
+            }
+            steps {
+              withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+                      sh """
+                      ${scannerHome}/bin/sonar-scanner  \
+                      -Dsonar.projectKey=maven-web-application \
+                      -Dsonar.projectName='maven-web-application' \
+                      -Dsonar.host.url=https://sonarqube.dominionsystem.org \
+                      -Dsonar.token=${SONAR_TOKEN} \
+                      -Dsonar.java.binaries=target/classes \
+
+                     """
+                  }
+              }
+        }
+    stage('4. Docker Image Build') {
+      steps {
+        sh "aws ecr get-login-password --region us-west-2 | sudo docker login --username AWS --password-stdin ${aws_account}.dkr.ecr.us-west-2.amazonaws.com"
+        sh "sudo docker build -t webapp ."
+        sh "sudo docker tag webapp:latest ${aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
+        sh "sudo docker push ${aws_account}.dkr.ecr.us-west-2.amazonaws.com/webapp:${params.ecr_tag}"
+      }
+    }
+
+    stage('5. Application Deployment in EKS') {
+      steps {
+        kubeconfig(caCertificate: '', credentialsId: 'kubeconfig', serverUrl: '') {
+          sh "kubectl delete -f manifest"
+        }
+      }
+    }
+
+    stage('6. Email Notification') {
+      steps {
+        mail bcc: 'fusisoft@gmail.com', body: '''Build is Over. Check the application using the URL below:
+         https://webapp.dominionsystem.org/myapps
+         Let me know if the changes look okay.
+         Thanks,
+         Dominion System Technologies,
+         +1 (313) 413-1477''', 
+         subject: 'Web Application was Successfully Deployed!!', to: 'fusisoft@gmail.com'
+      }
+    }
+  }
 }
 
 

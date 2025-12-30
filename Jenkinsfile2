@@ -1,44 +1,44 @@
-node
-{
-def mavenHome = tool name: "maven3.6.3"
-    
-    stage("1. git clone")
-    {
-       git credentialsId: 'gitCredentials', url: 'https://github.com/LandmakTechnology/maven-web-app.git'
-    }
-    
-    stage("2. Build")
-    {
-        sh "${mavenHome}/bin/mvn clean package"
+node('java-build-node') {
 
-        // bat mvn clean package  - for winows OS
-    }
-    stage('3. Sonar')
-    {
-         //sh "${mavenHome}/bin/mvn sonar:sonar"
-    }
-    stage('4. Nexus')
-     {
-         //sh "${mavenHome}/bin/mvn deploy"
-    }
-    stage('5. Deploy')
-    {
-    sshagent(['TomcatServer4']) {
+  def version = '1.1.0'
+  def runTests = true
 
+  stage('Checkout') {
+    checkout scm
+  }
+
+  stage('Build') {
+    if (env.BRANCH_NAME == 'dev') {
+      sh 'mvn -B clean package -DskipTests'
+      echo "Built version: ${version}"
+    } else {
+      echo "Skipping build (not dev)"
+    }
+  }
+
+  stage('Test') {
+    if (runTests && (env.BRANCH_NAME == 'dev' || env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'master')) {
+      sh 'mvn -B test'
+      withCredentials([usernamePassword(credentialsId: 'server-credentials', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
+        echo "Credentials loaded for demo. USER=$USER"
+      }
+    } else {
+      echo "Skipping tests"
+    }
+  }
+
+  stage('Deploy') {
+    if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'master') {
+      sh """
+        set -e
+        docker stop fusisoft-webapps || true
+        docker rm fusisoft-webapps || true
+        docker rmi fusisoft-webapps:${version} || true
+        docker build -t fusisoft-webapps:${version} .
+        docker run -d --name fusisoft-webapps -p 8085:8080 fusisoft-webapps:${version}
+      """
+    } else {
+      echo "Skipping deploy (not main/master)"
+    }
+  }
 }
-      //  echo "Can I deploy to production" 
-        deploy adapters: [tomcat9(credentialsId: 'tomcatCredentials', path: '', url: 'http://34.204.166.28:8080/')], contextPath: null, war: '**/maven-web-app.war'
-    //sh "sudo scp -o StrictHostKeyChecking=no target/maven-web-app.war ec2-user@34.204.166.28:/opt/apache-tomcat-9.0.37/webapps/"
-        
-    }
-
-    stage('6. Email Notification')
-    {
-
-emailext body: '''Hi
-
-Build Status
-Landmark Technology
-+ 1 437 215 2483''', recipientProviders: [developers()], subject: 'Build status', to: 'legah2000@gmail.com'    
-    }
-   }

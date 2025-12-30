@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fusisoft-config
+  namespace: gateway
+data:
+  DB_URL: jdbc:postgresql://fusisoft-db.c5e0wyqgew1t.us-west-2.rds.amazonaws.com:5432/contact
+  DB_USER: saas

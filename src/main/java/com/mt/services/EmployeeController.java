@@ -1,10 +1,9 @@
 package com.mt.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/employee")
@@ -19,18 +18,22 @@ public class EmployeeController {
             @RequestParam(required = false) String hobbies,
             @RequestParam(required = false) String birthPlace,
             @RequestParam(required = false) String favoritePlaces,
-            Model model) {
+            HttpSession session) {
 
-        // Add data to the model (request scope)
-        model.addAttribute("firstName", firstName);
-        model.addAttribute("lastName", lastName);
-        model.addAttribute("website", website);
-        model.addAttribute("dob", dob);
-        model.addAttribute("hobbies", hobbies);
-        model.addAttribute("birthPlace", birthPlace);
-        model.addAttribute("favoritePlaces", favoritePlaces);
+        session.setAttribute("firstName", firstName);
+        session.setAttribute("lastName", lastName);
+        session.setAttribute("website", website);
+        session.setAttribute("dob", dob);
+        session.setAttribute("hobbies", hobbies);
+        session.setAttribute("birthPlace", birthPlace);
+        session.setAttribute("favoritePlaces", favoritePlaces);
 
-        // Resolves to /WEB-INF/jsps/employeeDetails.jsp
-        return "employeeDetails";
+        // PRG pattern prevents form resubmission on refresh
+        return "redirect:/employee/details";
+    }
+
+    @GetMapping("/details")
+    public String employeeDetails() {
+        return "employeeDetails"; // /WEB-INF/jsps/employeeDetails.jsp
     }
 }

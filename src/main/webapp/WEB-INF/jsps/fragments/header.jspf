@@ -1,22 +1,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url var="cssMain" value="/styles/main.css" />
-<c:url var="jsMain" value="/js/main.js" />
-<c:url var="homeUrl" value="/" />
-<c:url var="contactUrl" value="/contact" />
-<c:url var="sreUrl" value="/sre" />
-<c:url var="devopsUrl" value="/devops" />
-<c:url var="devsecopsUrl" value="/devsecops" />
-<c:url var="iacUrl" value="/iac" />
-<c:url var="cyberUrl" value="/cybersecurity" />
-
-<link rel="stylesheet" href="${cssMain}" />
+<c:url var="cssMain" value="/styles/main.css"/>
+<c:url var="jsMain" value="/js/main.js"/>
+<link rel="stylesheet" href="${cssMain}"/>
 <script defer src="${jsMain}"></script>
+
+<c:url var="homeUrl" value="/"/>
+<c:url var="contactUrl" value="/contact"/>
+<c:url var="devopsUrl" value="/devops"/>
+<c:url var="sreUrl" value="/sre"/>
+<c:url var="devsecopsUrl" value="/devsecops"/>
+<c:url var="iacUrl" value="/iac"/>
+<c:url var="cyberUrl" value="/cybersecurity"/>
+<c:url var="loginUrl" value="/login"/>
+<c:url var="dashboardUrl" value="/dashboard"/>
 
 <div class="topbar">
   <a class="brand" href="${homeUrl}">
     <span class="brand-mark" aria-hidden="true">F</span>
-    <span>Fusisoft Technologies</span>
+    <span>
+      Fusisoft Technologies
+      <small>IT Consulting & Engineering</small>
+    </span>
   </a>
 
   <nav class="nav" aria-label="Primary navigation">
@@ -27,5 +32,6 @@
     <a href="${iacUrl}">IaC</a>
     <a href="${cyberUrl}">Cybersecurity</a>
     <a href="${contactUrl}">Contact</a>
+    <a href="${loginUrl}">Admin</a>
   </nav>
 </div>

@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    // Landing page: http://host:8080/myapps/
-    @GetMapping("/")
-    public String root() {
-        return "home";
+    // Root landing page
+    @GetMapping({ "/", "/home" })
+    public String home() {
+        return "home"; // /WEB-INF/jsps/home.jsp
     }
 
-    // Optional: http://host:8080/myapps/home
-    @GetMapping("/home")
-    public String home() {
-        return "home";
+    // Legacy support (old links/bookmarks)
+    @GetMapping("/services/home")
+    public String legacyHome() {
+        return "redirect:/";
     }
 }

@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ErrorController {
 
-    @GetMapping("/error")
+    @GetMapping({ "/error", "/services/error" })
     public String errorPage() {
-        return "error"; // /WEB-INF/jsps/error.jsp
+        // Resolves to /WEB-INF/jsps/error.jsp
+        return "error";
     }
 }

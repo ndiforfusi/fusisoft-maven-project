@@ -6,50 +6,27 @@ import java.sql.SQLException;
 
 public final class DatabaseConnection {
 
-    private static final String DB_URL;
-    private static final String DB_USER;
-    private static final String DB_PASSWORD;
-
-    static {
-        DB_URL = System.getenv("DB_URL");
-        DB_USER = System.getenv("DB_USER");
-        DB_PASSWORD = System.getenv("DB_PASSWORD");
-
-        if (DB_URL == null || DB_USER == null || DB_PASSWORD == null) {
-            throw new IllegalStateException(
-                    "Missing database environment variables. " +
-                            "Required: DB_URL, DB_USER, DB_PASSWORD");
-        }
-
-        try {
-            // Load JDBC driver explicitly (safe for older Tomcat / WAR deployments)
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            // Change driver if using PostgreSQL or others
-        } catch (ClassNotFoundException e) {
-            throw new IllegalStateException("JDBC Driver not found on classpath", e);
-        }
-    }
-
     private DatabaseConnection() {
-        // Prevent instantiation
     }
 
-    /**
-     * Returns a new JDBC Connection.
-     */
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-    }
-
-    /**
-     * Optional health check
-     */
-    public static boolean isDatabaseUp() {
-        try (Connection conn = getConnection()) {
-            return conn != null && conn.isValid(2);
-        } catch (SQLException e) {
-            return false;
+    private static String getEnvOrProp(String key) {
+        String v = System.getenv(key);
+        if (v == null || v.trim().isEmpty()) {
+            v = System.getProperty(key);
         }
+        return (v == null || v.trim().isEmpty()) ? null : v.trim();
+    }
+
+    public static Connection getConnection() throws SQLException {
+        String url = getEnvOrProp("DB_URL");
+        String user = getEnvOrProp("DB_USER");
+        String password = getEnvOrProp("DB_PASSWORD");
+
+        if (url == null || user == null || password == null) {
+            throw new IllegalStateException(
+                    "Database credentials not set. Required: DB_URL, DB_USER, DB_PASSWORD (env or -D properties).");
+        }
+
+        return DriverManager.getConnection(url, user, password);
     }
 }
-

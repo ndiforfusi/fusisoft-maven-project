@@ -3,99 +3,83 @@ package com.mt.controllers;
 import com.mt.utils.DatabaseConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
+@Controller
+public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     private static final String ADMIN_EMAIL = System.getenv("ADMIN_EMAIL");
     private static final String ADMIN_PASSWORD = System.getenv("ADMIN_PASSWORD");
 
-    private static final String DASHBOARD = "/jsps/dashboard.jsp";
-    private static final String LOGIN = "/jsps/login.jsp";
-    private static final String ERROR = "/jsps/error.jsp";
+    @GetMapping({ "/login" })
+    public String loginPage() {
+        return "login"; // /WEB-INF/jsps/login.jsp
+    }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    @GetMapping("/services/login")
+    public String legacyLogin() {
+        return "redirect:/login";
+    }
 
-        String email = trim(request.getParameter("email"));
-        String password = trim(request.getParameter("password"));
+    @PostMapping("/login")
+    public String doLogin(@RequestParam String email,
+            @RequestParam String password,
+            HttpSession session) {
 
-        // Basic input validation
+        email = trim(email);
+        password = trim(password);
+
         if (email == null || password == null) {
-            response.sendRedirect(request.getContextPath() + LOGIN + "?error=missing");
-            return;
+            return "redirect:/login?error=true";
         }
 
-        // Fast-path: env-based admin login (fallback)
-        if (isEnvAdminValid(email, password)) {
-            createAdminSession(request.getSession(true));
-            response.sendRedirect(request.getContextPath() + DASHBOARD);
-            return;
-        }
-
-        // DB validation
         try (Connection conn = DatabaseConnection.getConnection()) {
-
-            if (isAdminValidFromDb(email, password, conn)) {
-                createAdminSession(request.getSession(true));
-                response.sendRedirect(request.getContextPath() + DASHBOARD);
-            } else {
-                response.sendRedirect(request.getContextPath() + LOGIN + "?error=true");
+            if (isAdminValid(email, password, conn)) {
+                session.setAttribute("user", email);
+                session.setAttribute("admin", true);
+                return "redirect:/dashboard";
             }
-
-        } catch (SQLException e) {
-            logger.error("Database error during login for email={}", email, e);
-            response.sendRedirect(request.getContextPath() + ERROR);
+        } catch (Exception e) {
+            logger.error("Login failed due to server error.", e);
+            return "redirect:/error";
         }
+
+        return "redirect:/login?error=true";
     }
 
-    private void createAdminSession(HttpSession session) {
-        session.setAttribute("admin", Boolean.TRUE);
-        session.setMaxInactiveInterval(20 * 60); // 20 minutes
+    // Minimal dashboard route so you don't get 404 after login
+    @GetMapping("/dashboard")
+    public String dashboard(HttpSession session) {
+        Object admin = session.getAttribute("admin");
+        if (!(admin instanceof Boolean) || !((Boolean) admin)) {
+            return "redirect:/login";
+        }
+        return "dashboard"; // /WEB-INF/jsps/dashboard.jsp
     }
 
-    /**
-     * If you truly intend to authenticate admins, use a dedicated admins table.
-     * For now, this keeps your behavior but makes it safe.
-     */
-    private boolean isAdminValidFromDb(String email, String password, Connection conn) throws SQLException {
-        // ⚠️ Recommended: use `admins` table, not `contact`
-        final String sql = "SELECT password FROM admins WHERE email = ? LIMIT 1";
-
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, email);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (!rs.next())
-                    return false;
-
-                String storedPassword = rs.getString("password");
-                if (storedPassword == null)
-                    return false;
-
-                // NOTE: This is plain-text comparison. Prefer hashed passwords (see notes
-                // below).
-                return storedPassword.equals(password);
+    private boolean isAdminValid(String email, String password, Connection conn) throws Exception {
+        // If you store admin credentials in DB, update table/column names accordingly.
+        // Current query assumes: table contact(email,password)
+        String sql = "SELECT password FROM contact WHERE email = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String stored = rs.getString("password");
+                    return stored != null && stored.equals(password);
+                }
             }
         }
-    }
 
-    private boolean isEnvAdminValid(String email, String password) {
+        // Fallback to env admin credentials
         return ADMIN_EMAIL != null
                 && ADMIN_PASSWORD != null
                 && ADMIN_EMAIL.equals(email)
@@ -109,6 +93,3 @@ public class LoginController extends HttpServlet {
         return s.isEmpty() ? null : s;
     }
 }
-
-
-

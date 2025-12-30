@@ -1,36 +1,341 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <!DOCTYPE html>
-    <html lang="en">
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Infrastructure as Code (IaC) - Fusisoft Technologies</title>
-        <link rel="stylesheet" href="styles/main.css">
-    </head>
+        <!doctype html>
+        <html lang="en">
 
-    <body>
-        <header>
-            <h1>Infrastructure as Code (IaC)</h1>
-            <p>Automating Cloud Infrastructure with Code</p>
-        </header>
-        <section>
-            <h2>What We Offer</h2>
-            <p>With our IaC solutions, you can manage your infrastructure efficiently and programmatically. We work with
-                the leading tools and platforms like Terraform, AWS CloudFormation, and Ansible to automate your cloud
-                setup.</p>
-            <ul>
-                <li>Scalable Infrastructure Management</li>
-                <li>Disaster Recovery Automation</li>
-                <li>Automated CI/CD Pipelines</li>
-                <li>Cost Optimization Strategies</li>
-            </ul>
-        </section>
-        <footer>
-            <p>Optimize your infrastructure with code. Contact us to learn how we can help.</p>
-            <p><a href="contact.jsp">Get in Touch</a></p>
-        </footer>
-    </body>
+        <head>
+            <meta charset="UTF-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Infrastructure as Code (IaC) - Fusisoft Technologies</title>
 
-    </html>
+            <%-- Context-safe CSS link --%>
+                <c:url var="mainCss" value="/styles/main.css" />
+                <link rel="stylesheet" href="${mainCss}" />
+
+                <style>
+                    :root {
+                        --bg: #0b1220;
+                        --card: rgba(255, 255, 255, .06);
+                        --border: rgba(255, 255, 255, .14);
+                        --text: rgba(255, 255, 255, .92);
+                        --muted: rgba(255, 255, 255, .70);
+                        --brand: #4f8cff;
+                        --brand2: #2f6dff;
+                        --shadow: 0 18px 60px rgba(0, 0, 0, .35);
+                        --radius: 16px;
+                    }
+
+                    * {
+                        box-sizing: border-box;
+                    }
+
+                    body {
+                        margin: 0;
+                        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+                        color: var(--text);
+                        background:
+                            radial-gradient(1200px 700px at 20% 10%, rgba(79, 140, 255, .25), transparent 55%),
+                            radial-gradient(900px 600px at 80% 30%, rgba(47, 109, 255, .18), transparent 55%),
+                            linear-gradient(180deg, #070b14, var(--bg));
+                        min-height: 100vh;
+                    }
+
+                    .container {
+                        width: min(1100px, 100%);
+                        margin: 0 auto;
+                        padding: 26px 18px 48px;
+                    }
+
+                    .topbar {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        gap: 12px;
+                        padding: 14px 0 22px;
+                    }
+
+                    .brand {
+                        font-weight: 800;
+                        letter-spacing: .2px;
+                        text-decoration: none;
+                        color: var(--text);
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                    }
+
+                    .logo {
+                        width: 38px;
+                        height: 38px;
+                        border-radius: 12px;
+                        background: linear-gradient(135deg, var(--brand), var(--brand2));
+                        box-shadow: 0 14px 30px rgba(47, 109, 255, .25);
+                        display: grid;
+                        place-items: center;
+                        font-weight: 900;
+                        color: white;
+                    }
+
+                    .nav {
+                        display: flex;
+                        gap: 10px;
+                        flex-wrap: wrap;
+                        justify-content: flex-end;
+                    }
+
+                    .nav a {
+                        color: rgba(255, 255, 255, .85);
+                        text-decoration: none;
+                        padding: 10px 12px;
+                        border-radius: 12px;
+                        border: 1px solid rgba(255, 255, 255, .12);
+                        background: rgba(255, 255, 255, .05);
+                    }
+
+                    .nav a:hover {
+                        filter: brightness(1.08);
+                    }
+
+                    .hero {
+                        border: 1px solid var(--border);
+                        background: var(--card);
+                        border-radius: var(--radius);
+                        box-shadow: var(--shadow);
+                        padding: 22px;
+                        backdrop-filter: blur(10px);
+                    }
+
+                    .hero h1 {
+                        margin: 0;
+                        font-size: clamp(26px, 3.2vw, 40px);
+                        line-height: 1.1;
+                        letter-spacing: .2px;
+                    }
+
+                    .hero p {
+                        margin: 10px 0 0;
+                        color: var(--muted);
+                        max-width: 74ch;
+                        line-height: 1.55;
+                        font-size: 15px;
+                    }
+
+                    .cta {
+                        margin-top: 16px;
+                        display: flex;
+                        gap: 12px;
+                        flex-wrap: wrap;
+                        align-items: center;
+                    }
+
+                    .btn {
+                        appearance: none;
+                        border: 0;
+                        cursor: pointer;
+                        border-radius: 12px;
+                        padding: 12px 14px;
+                        font-weight: 800;
+                        text-decoration: none;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        min-width: 180px;
+                        transition: transform .05s ease, filter .15s ease;
+                        user-select: none;
+                    }
+
+                    .btn:active {
+                        transform: translateY(1px);
+                    }
+
+                    .btn-primary {
+                        color: white;
+                        background: linear-gradient(135deg, var(--brand), var(--brand2));
+                        box-shadow: 0 14px 30px rgba(47, 109, 255, .25);
+                    }
+
+                    .btn-primary:hover {
+                        filter: brightness(1.05);
+                    }
+
+                    .btn-ghost {
+                        color: rgba(255, 255, 255, .88);
+                        background: rgba(255, 255, 255, .06);
+                        border: 1px solid rgba(255, 255, 255, .14);
+                    }
+
+                    .btn-ghost:hover {
+                        filter: brightness(1.08);
+                    }
+
+                    .grid {
+                        margin-top: 18px;
+                        display: grid;
+                        grid-template-columns: 1.2fr .8fr;
+                        gap: 18px;
+                        align-items: start;
+                    }
+
+                    @media (max-width: 920px) {
+                        .grid {
+                            grid-template-columns: 1fr;
+                        }
+                    }
+
+                    .card {
+                        border: 1px solid var(--border);
+                        background: var(--card);
+                        border-radius: var(--radius);
+                        box-shadow: var(--shadow);
+                        padding: 18px 18px 16px;
+                        backdrop-filter: blur(10px);
+                    }
+
+                    .card h2 {
+                        margin: 0 0 8px;
+                        font-size: 18px;
+                    }
+
+                    .card p {
+                        margin: 0 0 12px;
+                        color: var(--muted);
+                        line-height: 1.6;
+                        font-size: 14px;
+                    }
+
+                    .features {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 12px;
+                        margin-top: 10px;
+                    }
+
+                    @media (max-width: 640px) {
+                        .features {
+                            grid-template-columns: 1fr;
+                        }
+                    }
+
+                    .feature {
+                        border: 1px solid rgba(255, 255, 255, .12);
+                        background: rgba(255, 255, 255, .05);
+                        border-radius: 14px;
+                        padding: 12px;
+                    }
+
+                    .feature strong {
+                        display: block;
+                        margin-bottom: 6px;
+                    }
+
+                    .feature span {
+                        color: var(--muted);
+                        font-size: 13px;
+                        line-height: 1.45;
+                        display: block;
+                    }
+
+                    .footer {
+                        margin-top: 18px;
+                        color: var(--muted);
+                        font-size: 13px;
+                        text-align: center;
+                    }
+                </style>
+        </head>
+
+        <body>
+
+            <c:url var="homeUrl" value="/services/home" />
+            <c:url var="contactUrl" value="/services/contact" />
+
+            <div class="container">
+
+                <div class="topbar">
+                    <a class="brand" href="${homeUrl}">
+                        <span class="logo" aria-hidden="true">F</span>
+                        <span>Fusisoft Technologies</span>
+                    </a>
+
+                    <nav class="nav" aria-label="Primary navigation">
+                        <a href="${homeUrl}">Home</a>
+                        <a href="${contactUrl}">Contact</a>
+                    </nav>
+                </div>
+
+                <header class="hero" aria-labelledby="pageTitle">
+                    <h1 id="pageTitle">Infrastructure as Code (IaC)</h1>
+                    <p>Automating cloud infrastructure with code—so environments are consistent, repeatable, and
+                        audit-friendly.</p>
+
+                    <div class="cta">
+                        <a class="btn btn-primary" href="${contactUrl}">Get in Touch</a>
+                        <a class="btn btn-ghost" href="#offer">What We Offer</a>
+                    </div>
+                </header>
+
+                <main class="grid">
+                    <section class="card" id="offer">
+                        <h2>What We Offer</h2>
+                        <p>
+                            With our IaC solutions, you can manage your infrastructure efficiently and programmatically.
+                            We work with leading tools and platforms like Terraform, AWS CloudFormation, and Ansible to
+                            automate your cloud setup.
+                        </p>
+
+                        <div class="features" role="list">
+                            <div class="feature" role="listitem">
+                                <strong>Scalable Infrastructure Management</strong>
+                                <span>Standardized, reusable modules to scale infrastructure safely.</span>
+                            </div>
+                            <div class="feature" role="listitem">
+                                <strong>Disaster Recovery Automation</strong>
+                                <span>Automate recovery patterns to reduce downtime and improve resilience.</span>
+                            </div>
+                            <div class="feature" role="listitem">
+                                <strong>Automated CI/CD Pipelines</strong>
+                                <span>Integrate IaC into pipelines for validated, repeatable releases.</span>
+                            </div>
+                            <div class="feature" role="listitem">
+                                <strong>Cost Optimization Strategies</strong>
+                                <span>Right-sizing, tagging, guardrails, and cost-aware architecture choices.</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <aside class="card">
+                        <h2>Tools we support</h2>
+                        <p>We tailor IaC to your platform, standards, and delivery workflow.</p>
+
+                        <div class="feature">
+                            <strong>Terraform</strong>
+                            <span>Reusable modules, state strategy, and environment promotion patterns.</span>
+                        </div>
+
+                        <div class="feature" style="margin-top:12px;">
+                            <strong>AWS CloudFormation</strong>
+                            <span>Stacks, nested stacks, change sets, and governance-friendly deployments.</span>
+                        </div>
+
+                        <div class="feature" style="margin-top:12px;">
+                            <strong>Ansible</strong>
+                            <span>Configuration management and post-provisioning automation.</span>
+                        </div>
+
+                        <div class="cta" style="margin-top:14px;">
+                            <a class="btn btn-primary" href="${contactUrl}">Request a Consultation</a>
+                        </div>
+                    </aside>
+                </main>
+
+                <footer class="footer">
+                    Optimize your infrastructure with code. Contact us to learn how we can help.
+                </footer>
+
+            </div>
+
+        </body>
+
+        </html>

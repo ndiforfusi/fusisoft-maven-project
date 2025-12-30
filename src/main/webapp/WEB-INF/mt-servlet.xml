@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!-- Component Scan for Controllers -->
-    <context:component-scan base-package="com.mt.controllers" />
+    <!-- Scan everything under com.mt (controllers, services, configs, etc.) -->
+    <context:component-scan base-package="com.mt" />
 
-    <!-- View Resolver -->
+    <!-- Enable @Controller, @RequestMapping, @GetMapping, @PostMapping, converters, etc. -->
+    <mvc:annotation-driven />
+
+    <!-- Static resources (CSS, JS, images) -->
+    <mvc:resources mapping="/styles/**" location="/styles/" />
+    <mvc:resources mapping="/images/**" location="/images/" />
+    <mvc:resources mapping="/js/**" location="/js/" />
+
+    <!-- JSP View Resolver (secure location) -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="jsps/" />
+        <property name="prefix" value="/WEB-INF/jsps/" />
         <property name="suffix" value=".jsp" />
     </bean>
+
 </beans>
 
 

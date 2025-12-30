@@ -18,8 +18,8 @@
 
   <properties>
     <!-- Java -->
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <java.version>8</java.version>
+    <maven.compiler.release>${java.version}</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -38,61 +38,65 @@
     <json.version>20240303</json.version>
     <postgres.version>42.7.4</postgres.version>
 
+    <!-- Servlet/JSP -->
+    <servlet.api.version>4.0.1</servlet.api.version>
+    <jsp.api.version>2.3.3</jsp.api.version>
+    <jstl.version>1.2</jstl.version>
+
     <!-- Plugins -->
     <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
     <maven.war.plugin.version>3.4.0</maven.war.plugin.version>
     <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
-    <jetty.plugin.version>9.4.56.v20240826</jetty.plugin.version>
+    <maven.enforcer.plugin.version>3.5.0</maven.enforcer.plugin.version>
+
+    <!-- Jetty (for local run) -->
+    <jetty.version>9.4.56.v20240826</jetty.version>
   </properties>
 
   <dependencies>
-    <!-- Spring -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-
+    <!-- Spring MVC stack -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
       <version>${spring.version}</version>
     </dependency>
 
-    <!-- Servlet API: Provided by Tomcat/Jetty container -->
+    <!-- Optional but very useful with JDBC apps -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!-- Servlet API (container provides this: Tomcat/Jetty) -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.1</version>
+      <version>${servlet.api.version}</version>
       <scope>provided</scope>
     </dependency>
 
-    <!-- JSP/JSTL support (commonly needed for WAR + JSP apps) -->
+    <!-- JSP API (container provides this) -->
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>${jsp.api.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- JSTL (needed by many JSPs that use <c:url>, <c:if>, etc.) -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
-      <version>1.2</version>
+      <version>${jstl.version}</version>
     </dependency>
 
-    <!-- Logging: SLF4J + Logback -->
+    <!-- Logging -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
-
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
@@ -106,25 +110,32 @@
       <version>${json.version}</version>
     </dependency>
 
-    <!-- PostgreSQL JDBC Driver -->
+    <!-- PostgreSQL -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>${postgres.version}</version>
     </dependency>
 
-    <!-- Unit Testing -->
+    <!-- Testing -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Spring test utilities (MockMvc, etc.) -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -133,26 +144,43 @@
     <finalName>myapps</finalName>
 
     <plugins>
+      <!-- Enforce correct Java version (optional but recommended) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>${maven.enforcer.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>enforce-java</id>
+            <goals><goal>enforce</goal></goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>
+                  <version>[${java.version},)</version>
+                </requireJavaVersion>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
       <!-- Compiler -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven.compiler.plugin.version}</version>
         <configuration>
-          <source>${maven.compiler.source}</source>
-          <target>${maven.compiler.target}</target>
+          <release>${maven.compiler.release}</release>
           <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
       </plugin>
 
-      <!-- Surefire (runs unit tests) -->
+      <!-- Surefire (unit tests) -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven.surefire.plugin.version}</version>
-        <configuration>
-          <useSystemClassLoader>true</useSystemClassLoader>
-        </configuration>
       </plugin>
 
       <!-- WAR plugin -->
@@ -161,26 +189,41 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>${maven.war.plugin.version}</version>
         <configuration>
-          <!-- Prevents common build failure when web.xml is missing -->
+          <!-- You DO have web.xml, but keeping this avoids build surprises -->
           <failOnMissingWebXml>false</failOnMissingWebXml>
-          <webappDirectory>src/main/webapp</webappDirectory>
         </configuration>
       </plugin>
 
-      <!-- Jetty for local run/testing -->
+      <!-- Jetty for local run/testing (with JSP support) -->
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>${jetty.plugin.version}</version>
+        <version>${jetty.version}</version>
         <configuration>
           <scanIntervalSeconds>10</scanIntervalSeconds>
           <webApp>
-            <contextPath>/maven-web-application</contextPath>
+            <!-- Use a simple root context for local dev -->
+            <contextPath>/</contextPath>
           </webApp>
         </configuration>
+
+        <!-- This is the key for JSP rendering in Jetty runs -->
+        <dependencies>
+          <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>apache-jsp</artifactId>
+            <version>${jetty.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>2.2.6</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
+
 </project>
 
 

@@ -1,31 +1,45 @@
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+package com.mt.controller;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ContactController {
 
-    // Mapping for contact success page
-    @RequestMapping(value = "/contactSuccess", method = RequestMethod.GET)
+    private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
+
+    /**
+     * GET: Contact Success Page
+     */
+    @GetMapping("/contactSuccess")
     public String contactSuccess(Model model) {
-        return "../jsps/successContact";  // Adjust path to match actual JSP location
+        return "successContact";
+        // Resolves to: /WEB-INF/jsps/successContact.jsp
     }
 
-    // Handle POST requests to submit contact details
-    @RequestMapping(value = "/contact", method = RequestMethod.POST)
+    /**
+     * POST: Handle Contact Form Submission
+     */
+    @PostMapping("/contact")
     public String submitContactDetails(
-            @RequestParam("name") String name,
-            @RequestParam("email") String email,
-            @RequestParam("phone") String phone,
-            @RequestParam("message") String message,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String phone,
+            @RequestParam(required = false) String message,
             Model model) {
+
+        logger.info("Contact form submitted - Name: {}, Email: {}, Phone: {}", name, email, phone);
+
         model.addAttribute("name", name);
-        return "redirect:/contactSuccess";  // Ensure it points to the GET method above
+        model.addAttribute("email", email);
+        model.addAttribute("phone", phone);
+        model.addAttribute("message", message);
+
+        return "redirect:/contactSuccess";
     }
 }
-
-

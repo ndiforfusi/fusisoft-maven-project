@@ -1,256 +1,536 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<!DOCTYPE html>
-	<html lang="en">
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Fusisoft Technologies - Experts in IT Consulting & Engineering</title>
-		<link href="images/symbol_logo.jpg" rel="icon">
-		<style>
-			body {
-				font-family: Arial, sans-serif;
-				margin: 0;
-				padding: 0;
-				background-color: #f4f4f4;
-			}
+		<!doctype html>
+		<html lang="en">
 
-			header {
-				text-align: center;
-				padding: 20px;
-				background-color: #003366;
-				color: white;
-			}
+		<head>
+			<meta charset="UTF-8" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<title>Fusisoft Technologies - Experts in IT Consulting & Engineering</title>
 
-			header img {
-				width: 80px;
-				height: auto;
-			}
+			<%-- Context-safe assets --%>
+				<c:url var="favicon" value="/images/symbol_logo.jpg" />
+				<link rel="icon" href="${favicon}" />
 
-			header h1 {
-				margin: 10px 0;
-				font-size: 2em;
-			}
+				<style>
+					:root {
+						--bg: #0b1220;
+						--card: rgba(255, 255, 255, .06);
+						--border: rgba(255, 255, 255, .14);
+						--text: rgba(255, 255, 255, .92);
+						--muted: rgba(255, 255, 255, .70);
+						--brand: #4f8cff;
+						--brand2: #2f6dff;
+						--shadow: 0 18px 60px rgba(0, 0, 0, .35);
+						--radius: 18px;
+					}
 
-			header h2 {
-				font-size: 1.2em;
-				margin: 5px 0;
-			}
+					* {
+						box-sizing: border-box;
+					}
 
-			.services-section {
-				padding: 50px 20px;
-				background-color: #fff;
-				text-align: center;
-			}
+					html,
+					body {
+						height: 100%;
+					}
 
-			.services-section h2 {
-				color: #003366;
-				font-size: 2em;
-				margin-bottom: 40px;
-			}
+					body {
+						margin: 0;
+						font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+						color: var(--text);
+						background:
+							radial-gradient(1200px 700px at 20% 10%, rgba(79, 140, 255, .25), transparent 55%),
+							radial-gradient(900px 600px at 80% 30%, rgba(47, 109, 255, .18), transparent 55%),
+							linear-gradient(180deg, #070b14, var(--bg));
+					}
 
-			.service {
-				display: inline-block;
-				width: 250px;
-				margin: 20px;
-				padding: 20px;
-				border: 1px solid #ddd;
-				border-radius: 8px;
-				background-color: #f9f9f9;
-			}
+					a {
+						color: inherit;
+					}
 
-			.service img {
-				width: 100%;
-				height: auto;
-				border-radius: 8px;
-			}
+					.container {
+						width: min(1180px, 100%);
+						margin: 0 auto;
+						padding: 24px 18px 56px;
+					}
 
-			.service h3 {
-				color: #003366;
-				font-size: 1.5em;
-			}
+					/* Top bar */
+					.topbar {
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						gap: 12px;
+						padding: 12px 0 18px;
+					}
 
-			.service p {
-				margin-bottom: 15px;
-			}
+					.brand {
+						display: flex;
+						align-items: center;
+						gap: 12px;
+						text-decoration: none;
+						color: var(--text);
+						font-weight: 900;
+						letter-spacing: .2px;
+					}
 
-			.service a {
-				text-decoration: none;
-				color: #003366;
-				font-weight: bold;
-			}
+					.brand .mark {
+						width: 42px;
+						height: 42px;
+						border-radius: 14px;
+						display: grid;
+						place-items: center;
+						background: linear-gradient(135deg, var(--brand), var(--brand2));
+						box-shadow: 0 14px 30px rgba(47, 109, 255, .25);
+						color: white;
+						font-weight: 900;
+					}
 
-			.service a:hover {
-				text-decoration: underline;
-			}
+					.brand .name {
+						display: flex;
+						flex-direction: column;
+						line-height: 1.1;
+					}
 
-			.contact-info {
-				text-align: center;
-				margin: 50px 0;
-			}
+					.brand .name small {
+						color: var(--muted);
+						font-weight: 600;
+					}
 
-			.contact-info p {
-				font-size: 1.2em;
-			}
+					.nav {
+						display: flex;
+						gap: 10px;
+						flex-wrap: wrap;
+						justify-content: flex-end;
+					}
 
-			.contact-info a {
-				color: #003366;
-				font-weight: bold;
-				text-decoration: none;
-			}
+					.nav a {
+						text-decoration: none;
+						padding: 10px 12px;
+						border-radius: 12px;
+						border: 1px solid rgba(255, 255, 255, .12);
+						background: rgba(255, 255, 255, .05);
+						color: rgba(255, 255, 255, .88);
+					}
 
-			.contact-info a:hover {
-				text-decoration: underline;
-			}
+					.nav a:hover {
+						filter: brightness(1.08);
+					}
 
-			.admin-login {
-				text-align: center;
-				margin: 50px 0;
-				padding: 20px;
-				border: 1px solid #ddd;
-				border-radius: 8px;
-				background-color: #e8e8e8;
-				max-width: 400px;
-				margin-left: auto;
-				margin-right: auto;
-			}
+					/* Hero */
+					.hero {
+						border: 1px solid var(--border);
+						background: var(--card);
+						border-radius: var(--radius);
+						box-shadow: var(--shadow);
+						backdrop-filter: blur(10px);
+						padding: 26px;
+						overflow: hidden;
+						position: relative;
+					}
 
-			.admin-login input {
-				width: calc(100% - 20px);
-				margin: 5px 0;
-				padding: 10px;
-				border: 1px solid #ccc;
-				border-radius: 4px;
-			}
+					.hero h1 {
+						margin: 0;
+						font-size: clamp(28px, 3.6vw, 44px);
+						line-height: 1.08;
+						letter-spacing: .2px;
+					}
 
-			.admin-login button {
-				width: 100%;
-				padding: 10px;
-				background-color: #003366;
-				color: white;
-				border: none;
-				border-radius: 4px;
-				font-size: 1em;
-				cursor: pointer;
-			}
+					.hero p {
+						margin: 12px 0 0;
+						color: var(--muted);
+						max-width: 76ch;
+						font-size: 15px;
+						line-height: 1.6;
+					}
 
-			.admin-login button:hover {
-				background-color: #00509e;
-			}
+					.hero .cta {
+						margin-top: 18px;
+						display: flex;
+						gap: 12px;
+						flex-wrap: wrap;
+						align-items: center;
+					}
 
-			footer {
-				padding: 20px;
-				background-color: #003366;
-				color: white;
-				text-align: center;
-			}
+					.btn {
+						appearance: none;
+						border: 0;
+						cursor: pointer;
+						border-radius: 12px;
+						padding: 12px 14px;
+						font-weight: 800;
+						text-decoration: none;
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
+						min-width: 180px;
+						transition: transform .05s ease, filter .15s ease;
+						user-select: none;
+					}
 
-			footer a {
-				color: #ffcc00;
-			}
+					.btn:active {
+						transform: translateY(1px);
+					}
 
-			footer small {
-				display: block;
-				margin-top: 10px;
-			}
+					.btn-primary {
+						color: white;
+						background: linear-gradient(135deg, var(--brand), var(--brand2));
+						box-shadow: 0 14px 30px rgba(47, 109, 255, .25);
+					}
 
-			.logo-container {
-				text-align: center;
-				margin: 50px 0;
-			}
+					.btn-primary:hover {
+						filter: brightness(1.05);
+					}
 
-			.logo-container img {
-				width: 300px;
-				height: auto;
-			}
-		</style>
-	</head>
+					.btn-ghost {
+						color: rgba(255, 255, 255, .88);
+						background: rgba(255, 255, 255, .06);
+						border: 1px solid rgba(255, 255, 255, .14);
+					}
 
-	<body>
-		<!-- Header Section -->
-		<header>
-			<img src="images/symbol_logo.jpg" alt="Fusisoft Logo">
-			<h1>Fusisoft Technologies</h1>
-			<h2>Your Partner in IT Consulting & Engineering</h2>
-		</header>
+					.btn-ghost:hover {
+						filter: brightness(1.08);
+					}
 
-		<!-- Services Section -->
-		<section class="services-section">
-			<h2>Our Services</h2>
+					/* Sections */
+					.section-title {
+						margin: 26px 0 14px;
+						font-size: 18px;
+						color: rgba(255, 255, 255, .88);
+						letter-spacing: .2px;
+					}
 
-			<!-- Service 1: DevOps Consulting -->
-			<div class="service">
-				<img src="images/devops.jpg" alt="DevOps Consulting">
-				<h3>DevOps Consulting</h3>
-				<p>Accelerate your software development lifecycle with our DevOps expertise. We help you automate,
-					scale, and optimize your development processes.</p>
-				<a href="jsps/devops-consulting.jsp">Learn More</a>
-			</div>
+					/* Services grid */
+					.grid {
+						display: grid;
+						grid-template-columns: repeat(12, 1fr);
+						gap: 14px;
+						align-items: stretch;
+					}
 
-			<!-- Service 2: SRE -->
-			<div class="service">
-				<img src="images/sre.jpg" alt="Site Reliability Engineering">
-				<h3>Site Reliability Engineering (SRE)</h3>
-				<p>Ensure high availability and top-notch performance of your services through our proven SRE
-					methodologies, built for resilience and efficiency.</p>
-				<a href="jsps/sre.jsp">Learn More</a>
-			</div>
+					.service {
+						grid-column: span 4;
+						border: 1px solid var(--border);
+						background: var(--card);
+						border-radius: var(--radius);
+						box-shadow: var(--shadow);
+						overflow: hidden;
+						backdrop-filter: blur(10px);
+						display: flex;
+						flex-direction: column;
+						min-height: 100%;
+					}
 
-			<!-- Service 3: DevSecOps -->
-			<div class="service">
-				<img src="images/devsecops.jpg" alt="DevSecOps Integration">
-				<h3>DevSecOps Integration</h3>
-				<p>Embed security within your development pipeline, ensuring every application and system is protected
-					with advanced security protocols from the start.</p>
-				<a href="jsps/devsecops.jsp">Learn More</a>
-			</div>
+					@media (max-width: 980px) {
+						.service {
+							grid-column: span 6;
+						}
+					}
 
-			<!-- Service 4: Infrastructure as Code -->
-			<div class="service">
-				<img src="images/iac.jpg" alt="Infrastructure as Code">
-				<h3>Infrastructure as Code (IaC)</h3>
-				<p>Automate your infrastructure setup with our IaC solutions, leveraging tools like Terraform and AWS
-					CloudFormation to manage your cloud environments.</p>
-				<a href="jsps/iac.jsp">Learn More</a>
-			</div>
+					@media (max-width: 640px) {
+						.service {
+							grid-column: span 12;
+						}
+					}
 
-			<!-- Service 5: Cybersecurity -->
-			<div class="service">
-				<img src="images/cybersecurity.jpg" alt="Cybersecurity Solutions">
-				<h3>Cybersecurity Solutions</h3>
-				<p>Protect your business with our comprehensive cybersecurity services, from vulnerability assessments
-					to full threat monitoring and incident response.</p>
-				<a href="jsps/cybersecurity.jsp">Learn More</a>
-			</div>
-		</section>
+					.service img {
+						width: 100%;
+						height: 160px;
+						object-fit: cover;
+						display: block;
+						filter: saturate(1.05);
+					}
 
-		<!-- Contact Information Section -->
-		<div class="contact-info">
-			<p><strong>Have a Project?</strong> Contact Us Below:</p>
-			<p><a href="jsps/contact.jsp">Submit Your Project Details</a></p>
-		</div>
+					.service .body {
+						padding: 14px 14px 16px;
+						display: flex;
+						flex-direction: column;
+						gap: 10px;
+						flex: 1;
+					}
 
-		<!-- Admin Login Section -->
-		<div class="admin-login">
-			<h3>Admin Login</h3>
-			<form action="adminLoginServlet" method="POST">
-				<input type="text" name="username" placeholder="Username" required>
-				<input type="password" name="password" placeholder="Password" required>
-				<button type="submit">Login</button>
-			</form>
-		</div>
+					.service h3 {
+						margin: 0;
+						font-size: 16px;
+						letter-spacing: .2px;
+					}
 
-		<!-- Logo Section -->
-		<div class="logo-container">
-			<img src="images/Logo-principal.jpg" alt="Fusisoft Logo">
-		</div>
+					.service p {
+						margin: 0;
+						color: var(--muted);
+						font-size: 13.5px;
+						line-height: 1.55;
+						flex: 1;
+					}
 
-		<!-- Footer Section -->
-		<footer>
-			<p>Fusisoft Technologies - Innovating IT Solutions for the Future</p>
-			<small>&copy; 2024 <a href="http://fusisoft.com" target="_blank">Fusisoft Technologies</a></small>
-		</footer>
-	</body>
+					.service a {
+						text-decoration: none;
+						font-weight: 800;
+						color: rgba(255, 255, 255, .92);
+						border: 1px solid rgba(255, 255, 255, .14);
+						background: rgba(255, 255, 255, .06);
+						padding: 10px 12px;
+						border-radius: 12px;
+						display: inline-flex;
+						align-items: center;
+						justify-content: center;
+						width: fit-content;
+					}
 
-	</html>
+					.service a:hover {
+						filter: brightness(1.08);
+					}
+
+					/* Split section */
+					.split {
+						margin-top: 18px;
+						display: grid;
+						grid-template-columns: 1.1fr .9fr;
+						gap: 14px;
+						align-items: start;
+					}
+
+					@media (max-width: 920px) {
+						.split {
+							grid-template-columns: 1fr;
+						}
+					}
+
+					.card {
+						border: 1px solid var(--border);
+						background: var(--card);
+						border-radius: var(--radius);
+						box-shadow: var(--shadow);
+						backdrop-filter: blur(10px);
+						padding: 16px;
+					}
+
+					.card h3 {
+						margin: 0 0 8px;
+						font-size: 16px;
+					}
+
+					.card p {
+						margin: 0 0 12px;
+						color: var(--muted);
+						font-size: 14px;
+						line-height: 1.6;
+					}
+
+					/* Admin login */
+					.form {
+						display: grid;
+						gap: 10px;
+						margin-top: 10px;
+					}
+
+					label {
+						font-size: 12px;
+						color: var(--muted);
+						margin-bottom: 4px;
+						display: block;
+					}
+
+					input {
+						width: 100%;
+						padding: 12px;
+						border-radius: 12px;
+						border: 1px solid rgba(255, 255, 255, .18);
+						background: rgba(255, 255, 255, .06);
+						color: var(--text);
+						outline: none;
+					}
+
+					input:focus {
+						border-color: rgba(79, 140, 255, .85);
+						box-shadow: 0 0 0 4px rgba(79, 140, 255, .18);
+					}
+
+					/* Footer */
+					footer {
+						margin-top: 18px;
+						text-align: center;
+						color: var(--muted);
+						font-size: 13px;
+						padding: 18px 0 0;
+					}
+
+					footer a {
+						color: rgba(255, 255, 255, .90);
+					}
+				</style>
+		</head>
+
+		<body>
+
+			<%-- Context-safe links --%>
+				<c:url var="devopsUrl" value="/jsps/devops-consulting.jsp" />
+				<c:url var="sreUrl" value="/jsps/sre.jsp" />
+				<c:url var="devsecopsUrl" value="/jsps/devsecops.jsp" />
+				<c:url var="iacUrl" value="/jsps/iac.jsp" />
+				<c:url var="cyberUrl" value="/jsps/cybersecurity.jsp" />
+
+				<%-- Prefer controller route for contact --%>
+					<c:url var="contactUrl" value="/services/contact" />
+					<c:url var="homeUrl" value="/services/home" />
+
+					<%-- Images --%>
+						<c:url var="symbolLogo" value="/images/symbol_logo.jpg" />
+						<c:url var="logoPrincipal" value="/images/Logo-principal.jpg" />
+						<c:url var="imgDevops" value="/images/devops.jpg" />
+						<c:url var="imgSre" value="/images/sre.jpg" />
+						<c:url var="imgDevsecops" value="/images/devsecops.jpg" />
+						<c:url var="imgIac" value="/images/iac.jpg" />
+						<c:url var="imgCyber" value="/images/cybersecurity.jpg" />
+
+						<%-- Admin login endpoint (align with your servlet mapping) --%>
+							<c:url var="adminLoginUrl" value="/login" />
+
+							<div class="container">
+
+								<!-- Top Bar -->
+								<div class="topbar">
+									<a class="brand" href="${homeUrl}">
+										<span class="mark" aria-hidden="true">F</span>
+										<span class="name">
+											Fusisoft Technologies
+											<small>IT Consulting & Engineering</small>
+										</span>
+									</a>
+
+									<nav class="nav" aria-label="Primary navigation">
+										<a href="#services">Services</a>
+										<a href="${contactUrl}">Contact</a>
+										<a href="#admin">Admin</a>
+									</nav>
+								</div>
+
+								<!-- Hero -->
+								<header class="hero">
+									<h1>Experts in IT Consulting & Engineering</h1>
+									<p>
+										We help organizations deliver faster with DevOps, SRE, DevSecOps, Infrastructure
+										as Code, and Cybersecurity—
+										built for reliability, security, and scale.
+									</p>
+
+									<div class="cta">
+										<a class="btn btn-primary" href="${contactUrl}">Submit Your Project Details</a>
+										<a class="btn btn-ghost" href="#services">Explore Services</a>
+									</div>
+								</header>
+
+								<!-- Services -->
+								<h2 class="section-title" id="services">Our Services</h2>
+
+								<section class="grid" aria-label="Service offerings">
+
+									<article class="service">
+										<img src="${imgDevops}" alt="DevOps Consulting" />
+										<div class="body">
+											<h3>DevOps Consulting</h3>
+											<p>Automate, scale, and optimize delivery pipelines—CI/CD, automation, and
+												cloud-native practices.</p>
+											<a href="${devopsUrl}">Learn More</a>
+										</div>
+									</article>
+
+									<article class="service">
+										<img src="${imgSre}" alt="Site Reliability Engineering" />
+										<div class="body">
+											<h3>Site Reliability Engineering (SRE)</h3>
+											<p>Improve availability and performance using SLOs, error budgets,
+												observability, and reliability patterns.</p>
+											<a href="${sreUrl}">Learn More</a>
+										</div>
+									</article>
+
+									<article class="service">
+										<img src="${imgDevsecops}" alt="DevSecOps Integration" />
+										<div class="body">
+											<h3>DevSecOps Integration</h3>
+											<p>Embed security into every stage of delivery—scanning, policy-as-code, and
+												secure cloud practices.</p>
+											<a href="${devsecopsUrl}">Learn More</a>
+										</div>
+									</article>
+
+									<article class="service">
+										<img src="${imgIac}" alt="Infrastructure as Code" />
+										<div class="body">
+											<h3>Infrastructure as Code (IaC)</h3>
+											<p>Build repeatable cloud environments with Terraform and
+												CloudFormation—fast, consistent, auditable.</p>
+											<a href="${iacUrl}">Learn More</a>
+										</div>
+									</article>
+
+									<article class="service">
+										<img src="${imgCyber}" alt="Cybersecurity Solutions" />
+										<div class="body">
+											<h3>Cybersecurity Solutions</h3>
+											<p>Protect your business with assessments, hardening, monitoring, and
+												incident response readiness.</p>
+											<a href="${cyberUrl}">Learn More</a>
+										</div>
+									</article>
+
+								</section>
+
+								<!-- Contact + Admin -->
+								<section class="split" aria-label="Contact and admin access">
+
+									<div class="card">
+										<h3>Have a Project?</h3>
+										<p>Tell us what you’re building and your timeline. We’ll respond within 1–2
+											business days.</p>
+										<a class="btn btn-primary" href="${contactUrl}">Contact Us</a>
+									</div>
+
+									<div class="card" id="admin">
+										<h3>Admin Login</h3>
+										<p>Authorized staff only.</p>
+
+										<%-- NOTE: Your earlier LoginController servlet expects parameters: email &
+											password. If your current servlet expects username & password, rename the
+											input "email" back to "username" . --%>
+
+											<form class="form" action="${adminLoginUrl}" method="post">
+												<div>
+													<label for="email">Email</label>
+													<input id="email" name="email" type="email" autocomplete="username"
+														required placeholder="admin@fusisoft.com" />
+												</div>
+
+												<div>
+													<label for="password">Password</label>
+													<input id="password" name="password" type="password"
+														autocomplete="current-password" required
+														placeholder="••••••••" />
+												</div>
+
+												<button class="btn btn-primary" type="submit">Login</button>
+											</form>
+									</div>
+
+								</section>
+
+								<!-- Logo -->
+								<div class="card" style="margin-top:14px; text-align:center;">
+									<img src="${logoPrincipal}" alt="Fusisoft Logo"
+										style="width:min(320px, 90%); height:auto;" />
+								</div>
+
+								<!-- Footer -->
+								<footer>
+									<p>Fusisoft Technologies — Innovating IT Solutions for the Future</p>
+									<small>&copy; 2024 <a href="http://fusisoft.com" target="_blank"
+											rel="noopener">Fusisoft Technologies</a></small>
+								</footer>
+
+							</div>
+
+		</body>
+
+		</html>

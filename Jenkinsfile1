@@ -39,7 +39,7 @@ pipeline {
       when { expression { params.RUN_TESTS } }
       steps {
         script {
-          def mvnHome = tool(name: 'maven3.9.6', type: 'hudson.tasks.Maven$MavenInstallation')
+          def mvnHome = tool(name: 'maven_3-9-6', type: 'hudson.tasks.Maven$MavenInstallation')
           sh """
             set -euo pipefail
             ${mvnHome}/bin/mvn -B -f pom.xml test

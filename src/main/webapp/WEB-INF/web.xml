@@ -36,36 +36,33 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <!-- IMPORTANT: Map Spring to ROOT so /myapps/ works -->
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
-        <url-pattern>/services/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!-- Session config (recommended) -->
+    <!-- Session config -->
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
 
-    <!-- Error Handling
-         IMPORTANT: because JSPs are moved to /WEB-INF/jsps/, you cannot point error pages to /jsps/error.jsp.
-         Use Spring routes instead. -->
+    <!-- Error Handling: Route to controller (NOT JSP path) -->
     <error-page>
         <error-code>404</error-code>
-        <location>/services/error</location>
-    </error-page>
-    <error-page>
-        <error-code>500</error-code>
-        <location>/services/error</location>
+        <location>/error</location>
     </error-page>
 
-    <!-- Welcome Page
-         Since DispatcherServlet is /services/*, use a controller route -->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error</location>
+    </error-page>
+
+    <!-- Welcome Page -->
     <welcome-file-list>
-        <welcome-file>services/home</welcome-file>
+        <welcome-file>/</welcome-file>
     </welcome-file-list>
 
 </web-app>
-
-
 
 

@@ -38,13 +38,12 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!-- Map Spring to ROOT so /myapps/ works -->
+    <!-- Map Spring to root so /myapps/ works -->
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!-- Session config -->
     <session-config>
         <session-timeout>30</session-timeout>
         <cookie-config>
@@ -52,7 +51,7 @@
         </cookie-config>
     </session-config>
 
-    <!-- Error Handling: Route to controller -->
+    <!-- Error routes go through controllers -->
     <error-page>
         <error-code>404</error-code>
         <location>/error</location>
@@ -63,16 +62,12 @@
         <location>/error</location>
     </error-page>
 
-    <!-- (Optional) Catch uncaught exceptions -->
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error</location>
     </error-page>
 
-    <!-- Welcome Page -->
     <welcome-file-list>
         <welcome-file>/</welcome-file>
     </welcome-file-list>
-
 </web-app>
-

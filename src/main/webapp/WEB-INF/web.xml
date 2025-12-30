@@ -1,12 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1">
+         version="3.1"
+         metadata-complete="false">
 
     <display-name>Fusisoft Web Application</display-name>
 
-    <!-- (Recommended) Force UTF-8 encoding -->
+    <!-- Force UTF-8 encoding -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -36,7 +38,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!-- IMPORTANT: Map Spring to ROOT so /myapps/ works -->
+    <!-- Map Spring to ROOT so /myapps/ works -->
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
         <url-pattern>/</url-pattern>
@@ -45,9 +47,12 @@
     <!-- Session config -->
     <session-config>
         <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+        </cookie-config>
     </session-config>
 
-    <!-- Error Handling: Route to controller (NOT JSP path) -->
+    <!-- Error Handling: Route to controller -->
     <error-page>
         <error-code>404</error-code>
         <location>/error</location>
@@ -58,11 +63,16 @@
         <location>/error</location>
     </error-page>
 
+    <!-- (Optional) Catch uncaught exceptions -->
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error</location>
+    </error-page>
+
     <!-- Welcome Page -->
     <welcome-file-list>
         <welcome-file>/</welcome-file>
     </welcome-file-list>
 
 </web-app>
-
 

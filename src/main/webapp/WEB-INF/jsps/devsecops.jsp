@@ -14,8 +14,9 @@
         <%@ include file="fragments/header.jspf" %>
 
           <c:url var="heroImg" value="/images/devsecops.jpg" />
-          <header class="hero glass">
+          <header class="hero glass" data-reveal>
             <div class="hero-bg" style="background-image:url('${heroImg}');"></div>
+            <div class="hero-badge"><i class="fa-solid fa-shield-heart"></i> Security that feels invisible</div>
             <h1>DevSecOps Integration</h1>
             <p>Embed security into CI/CD: shift-left testing, least privilege, and secure runtime controls.</p>
             <div class="cta">
@@ -27,12 +28,12 @@
           </header>
 
           <main class="grid">
-            <section class="card glass">
+            <section class="card glass" data-reveal>
               <h2>What we deliver</h2>
               <p>Security built into your delivery process—secure by default.</p>
 
               <div class="services">
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">Testing</div>
                     <div class="service-title">Security Gates</div>
@@ -40,7 +41,7 @@
                   </div>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">IAM</div>
                     <div class="service-title">Least Privilege</div>
@@ -48,7 +49,7 @@
                   </div>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">Compliance</div>
                     <div class="service-title">As Code</div>
@@ -56,7 +57,7 @@
                   </div>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">Cloud</div>
                     <div class="service-title">Runtime Security</div>
@@ -66,7 +67,7 @@
               </div>
             </section>
 
-            <aside class="card glass">
+            <aside class="card glass" data-reveal>
               <h2>Engagement options</h2>
               <p>Pick a model that fits your timeline and goals.</p>
 

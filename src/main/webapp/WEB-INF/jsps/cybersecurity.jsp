@@ -14,8 +14,9 @@
                 <%@ include file="fragments/header.jspf" %>
 
                     <c:url var="heroImg" value="/images/cybersecurity.jpg" />
-                    <header class="hero glass">
+                    <header class="hero glass" data-reveal>
                         <div class="hero-bg" style="background-image:url('${heroImg}');"></div>
+                        <div class="hero-badge"><i class="fa-solid fa-user-shield"></i> Defense that feels effortless</div>
                         <h1>Cybersecurity Solutions</h1>
                         <p>Reduce risk with visibility, hardening, vulnerability management, and incident readiness.</p>
                         <div class="cta">
@@ -27,12 +28,12 @@
                     </header>
 
                     <main class="grid">
-                        <section class="card glass">
+                        <section class="card glass" data-reveal>
                             <h2>What we deliver</h2>
                             <p>Security that is practical, measurable, and aligned to your operations.</p>
 
                             <div class="services">
-                                <div class="service-card">
+                                <div class="service-card" data-reveal>
                                     <div class="service-content">
                                         <div class="service-pill">Threat</div>
                                         <div class="service-title">Detection</div>
@@ -40,7 +41,7 @@
                                     </div>
                                 </div>
 
-                                <div class="service-card">
+                                <div class="service-card" data-reveal>
                                     <div class="service-content">
                                         <div class="service-pill">Identity</div>
                                         <div class="service-title">IAM Hardening</div>
@@ -48,7 +49,7 @@
                                     </div>
                                 </div>
 
-                                <div class="service-card">
+                                <div class="service-card" data-reveal>
                                     <div class="service-content">
                                         <div class="service-pill">Vuln</div>
                                         <div class="service-title">Remediation</div>
@@ -56,7 +57,7 @@
                                     </div>
                                 </div>
 
-                                <div class="service-card">
+                                <div class="service-card" data-reveal>
                                     <div class="service-content">
                                         <div class="service-pill">Architecture</div>
                                         <div class="service-title">Security Design</div>
@@ -66,7 +67,7 @@
                             </div>
                         </section>
 
-                        <aside class="card glass">
+                        <aside class="card glass" data-reveal>
                             <h2>Engagement options</h2>
                             <p>Pick a model that fits your timeline and goals.</p>
 

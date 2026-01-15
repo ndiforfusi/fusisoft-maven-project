@@ -11,17 +11,15 @@
   <div class="container">
     <%@ include file="fragments/header.jspf" %>
 
-    <div class="card glass status-card">
-      <div class="status-icon success" aria-hidden="true">
-        <i class="fa-solid fa-check"></i>
-      </div>
+    <div class="card glass status-card" data-reveal>
+      <div class="status-icon success"><i class="fa-solid fa-check"></i></div>
       <div class="alert alert-success">
         <strong>Submitted successfully.</strong><br/>
         We’ll review your request and get back to you shortly.
       </div>
 
       <h2>Thank you<c:if test="${not empty sessionScope.contactName}">, ${sessionScope.contactName}</c:if>!</h2>
-      <p>
+      <p style="color:rgba(255,255,255,.82); line-height:1.6;">
         Your project details have been received. If urgent, include timelines and constraints in your message.
       </p>
 

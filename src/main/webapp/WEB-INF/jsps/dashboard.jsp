@@ -16,7 +16,7 @@
   <div class="container">
     <%@ include file="fragments/header.jspf" %>
 
-    <header class="hero glass">
+    <header class="hero glass" data-reveal>
       <h1>Admin Dashboard</h1>
       <p>Welcome, <strong><c:out value="${sessionScope.user}"/></strong>. View submissions and manage requests.</p>
       <div class="cta">
@@ -25,8 +25,11 @@
       </div>
     </header>
 
-    <div class="card glass">
-      <h2>Submissions</h2>
+    <div class="card glass" data-reveal>
+      <div class="card-header">
+        <h2>Submissions</h2>
+        <span class="pill"><i class="fa-solid fa-table"></i> Live Intake</span>
+      </div>
       <p>This table is a placeholder. Next step is to query your DB and render rows.</p>
 
       <table class="table" aria-label="Submitted contact requests">

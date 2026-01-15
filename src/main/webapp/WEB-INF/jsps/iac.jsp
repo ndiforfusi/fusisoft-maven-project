@@ -14,8 +14,9 @@
         <%@ include file="fragments/header.jspf" %>
 
           <c:url var="heroImg" value="/images/iac.jpg" />
-          <header class="hero glass">
+          <header class="hero glass" data-reveal>
             <div class="hero-bg" style="background-image:url('${heroImg}');"></div>
+            <div class="hero-badge"><i class="fa-solid fa-code"></i> Infrastructure that behaves like magic</div>
             <h1>Infrastructure as Code (IaC)</h1>
             <p>Automate cloud infrastructure with code using Terraform, CloudFormation, and Ansible.</p>
             <div class="cta">
@@ -27,12 +28,12 @@
           </header>
 
           <main class="grid">
-            <section class="card glass">
+            <section class="card glass" data-reveal>
               <h2>What we deliver</h2>
               <p>Repeatable environments, drift control, and automation-first governance.</p>
 
               <div class="services">
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">Terraform</div>
                     <div class="service-title">Modules</div>
@@ -40,7 +41,7 @@
                   </div>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">Governance</div>
                     <div class="service-title">Drift Control</div>
@@ -48,7 +49,7 @@
                   </div>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">Recovery</div>
                     <div class="service-title">DR Automation</div>
@@ -56,7 +57,7 @@
                   </div>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">CI</div>
                     <div class="service-title">Infra Pipelines</div>
@@ -66,7 +67,7 @@
               </div>
             </section>
 
-            <aside class="card glass">
+            <aside class="card glass" data-reveal>
               <h2>Engagement options</h2>
               <p>Pick a model that fits your timeline and goals.</p>
 

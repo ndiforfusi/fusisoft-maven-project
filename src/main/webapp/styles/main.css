@@ -238,6 +238,73 @@ a:hover {
     font-size: 14px
 }
 
+/* Forms */
+.form {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.label {
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: .2px;
+    color: rgba(255, 255, 255, .88);
+}
+
+.input,
+.textarea,
+.select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(7, 12, 26, .7);
+    color: var(--text);
+    font-size: 14px;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: rgba(255, 255, 255, .45);
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+    outline: none;
+    border-color: rgba(24, 201, 255, .6);
+    box-shadow: 0 0 0 3px rgba(24, 201, 255, .18);
+}
+
+.help {
+    color: rgba(255, 255, 255, .65);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.features {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.feature {
+    display: grid;
+    gap: 4px;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    font-size: 13px;
+    color: rgba(255, 255, 255, .75);
+}
+
+.feature strong {
+    color: rgba(255, 255, 255, .92);
+}
+
 /* Service cards */
 .services {
     margin-top: 8px;
@@ -335,6 +402,80 @@ a:hover {
     border: 1px solid rgba(255, 255, 255, .14);
     background: rgba(255, 255, 255, .05);
     font-size: 13px;
+}
+
+.alert-success {
+    border-color: rgba(0, 214, 157, .4);
+    background: rgba(0, 214, 157, .12);
+    color: rgba(255, 255, 255, .92);
+}
+
+.alert-danger {
+    border-color: rgba(255, 92, 92, .4);
+    background: rgba(255, 92, 92, .12);
+    color: rgba(255, 255, 255, .92);
+}
+
+/* Tables */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+    font-size: 13px;
+}
+
+.table th,
+.table td {
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+.table th {
+    font-weight: 800;
+    color: rgba(255, 255, 255, .86);
+    letter-spacing: .2px;
+}
+
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, .03);
+}
+
+/* Status pages */
+.status-card {
+    text-align: center;
+    padding: 26px;
+}
+
+.status-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 16px;
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.status-icon.success {
+    background: linear-gradient(135deg, #39e3b5, #1bbf8f);
+    color: #021c16;
+    box-shadow: 0 18px 40px rgba(27, 191, 143, .22);
+}
+
+.status-icon.error {
+    background: linear-gradient(135deg, #ff6b6b, #ff3b3b);
+    color: #250909;
+    box-shadow: 0 18px 40px rgba(255, 59, 59, .22);
+}
+
+.status-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 18px;
 }
 
 /* Footer */

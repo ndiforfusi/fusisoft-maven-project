@@ -27,7 +27,7 @@
           </header>
 
           <main class="grid">
-            <section class="card">
+            <section class="card glass">
               <h2>What we deliver</h2>
               <p>Implementation-ready pipelines, automation, and operational excellence.</p>
 
@@ -66,7 +66,7 @@
               </div>
             </section>
 
-            <aside class="card">
+            <aside class="card glass">
               <h2>Engagement options</h2>
               <p>Pick a model that fits your timeline and goals.</p>
 

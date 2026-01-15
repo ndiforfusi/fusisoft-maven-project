@@ -11,16 +11,13 @@
   <div class="container">
     <%@ include file="fragments/header.jspf" %>
 
-    <c:url var="heroImg" value="/images/iac.jpg" />
-    <header class="hero glass" data-reveal>
-      <div class="hero-bg" style="background-image:url('${heroImg}');"></div>
-      <div class="hero-badge"><i class="fa-solid fa-envelope-open-text"></i> Let’s craft something magical</div>
+    <header class="hero glass">
       <h1>Contact Us</h1>
       <p>Tell us about your project. We’ll respond with next steps and a clear plan.</p>
     </header>
 
     <main class="grid">
-      <section class="card glass" data-reveal>
+      <section class="card glass">
         <h2>Project Details</h2>
 
         <c:url var="submitUrl" value="/contact"/>
@@ -43,7 +40,7 @@
         </form>
       </section>
 
-      <aside class="card glass" data-reveal>
+      <aside class="card glass">
         <h2>What happens next?</h2>
         <p>After you submit, we’ll review your request and reach out with options.</p>
 

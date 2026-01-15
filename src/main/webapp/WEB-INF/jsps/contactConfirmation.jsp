@@ -11,15 +11,17 @@
   <div class="container">
     <%@ include file="fragments/header.jspf" %>
 
-    <div class="card glass status-card" data-reveal>
-      <div class="status-icon success"><i class="fa-solid fa-check"></i></div>
+    <div class="card glass status-card">
+      <div class="status-icon success" aria-hidden="true">
+        <i class="fa-solid fa-check"></i>
+      </div>
       <h2>Thank You!</h2>
-      <p style="color:rgba(255,255,255,.82); line-height:1.6;">
+      <p>
         Dear <strong><c:out value="${sessionScope.contactName}" default="Customer"/></strong>,
         thank you for reaching out. We have received your request and will respond shortly.
       </p>
 
-      <div class="cta">
+      <div class="status-actions">
         <c:url var="homeUrl" value="/"/>
         <a class="btn btn-primary" href="${homeUrl}">Return Home</a>
         <c:url var="contactUrl" value="/contact"/>

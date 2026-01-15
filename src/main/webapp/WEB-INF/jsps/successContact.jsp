@@ -23,7 +23,7 @@
         Your project details have been received. If urgent, include timelines and constraints in your message.
       </p>
 
-      <div class="cta" style="justify-content:center;">
+      <div class="status-actions">
         <c:url var="homeUrl" value="/"/>
         <a class="btn btn-primary" href="${homeUrl}">Back to Home</a>
         <c:url var="contactUrl" value="/contact"/>

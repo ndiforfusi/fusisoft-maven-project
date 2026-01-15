@@ -11,7 +11,7 @@
   <div class="container">
     <%@ include file="fragments/header.jspf" %>
 
-    <div class="card" style="max-width:520px; margin:0 auto;">
+    <div class="card glass" style="max-width:520px; margin:0 auto;">
       <h2>Admin Login</h2>
       <p style="color:rgba(255,255,255,.78); margin-top:-2px;">
         Sign in to view admin dashboard.

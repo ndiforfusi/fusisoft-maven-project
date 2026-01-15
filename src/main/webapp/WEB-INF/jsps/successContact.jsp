@@ -11,18 +11,21 @@
   <div class="container">
     <%@ include file="fragments/header.jspf" %>
 
-    <div class="card" style="text-align:center; padding:26px;">
-      <div class="alert alert-success" style="display:inline-block; text-align:left;">
+    <div class="card glass status-card">
+      <div class="status-icon success" aria-hidden="true">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <div class="alert alert-success">
         <strong>Submitted successfully.</strong><br/>
         We’ll review your request and get back to you shortly.
       </div>
 
-      <h2 style="margin-top:16px;">Thank you<c:if test="${not empty sessionScope.contactName}">, ${sessionScope.contactName}</c:if>!</h2>
-      <p style="color:rgba(255,255,255,.82); line-height:1.6;">
+      <h2>Thank you<c:if test="${not empty sessionScope.contactName}">, ${sessionScope.contactName}</c:if>!</h2>
+      <p>
         Your project details have been received. If urgent, include timelines and constraints in your message.
       </p>
 
-      <div class="cta" style="justify-content:center;">
+      <div class="status-actions">
         <c:url var="homeUrl" value="/"/>
         <a class="btn btn-primary" href="${homeUrl}">Back to Home</a>
         <c:url var="contactUrl" value="/contact"/>

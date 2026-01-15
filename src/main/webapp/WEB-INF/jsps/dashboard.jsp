@@ -16,7 +16,7 @@
   <div class="container">
     <%@ include file="fragments/header.jspf" %>
 
-    <header class="hero">
+    <header class="hero glass">
       <h1>Admin Dashboard</h1>
       <p>Welcome, <strong><c:out value="${sessionScope.user}"/></strong>. View submissions and manage requests.</p>
       <div class="cta">
@@ -25,7 +25,7 @@
       </div>
     </header>
 
-    <div class="card">
+    <div class="card glass">
       <h2>Submissions</h2>
       <p>This table is a placeholder. Next step is to query your DB and render rows.</p>
 

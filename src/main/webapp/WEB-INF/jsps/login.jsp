@@ -11,8 +11,11 @@
   <div class="container">
     <%@ include file="fragments/header.jspf" %>
 
-    <div class="card" style="max-width:520px; margin:0 auto;">
-      <h2>Admin Login</h2>
+    <div class="card glass" style="max-width:520px; margin:0 auto;" data-reveal>
+      <div class="card-header">
+        <h2>Admin Login</h2>
+        <span class="pill"><i class="fa-solid fa-lock"></i> Secure Access</span>
+      </div>
       <p style="color:rgba(255,255,255,.78); margin-top:-2px;">
         Sign in to view admin dashboard.
       </p>

@@ -14,14 +14,20 @@
         <%@ include file="fragments/header.jspf" %>
 
           <c:url var="heroImg" value="/images/devops.jpg" />
-          <header class="hero glass">
+          <header class="hero glass" data-reveal>
             <div class="hero-bg" style="background-image:url('${heroImg}');"></div>
 
+            <div class="hero-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Magical engineering, measurable outcomes</div>
             <h1>Build. Secure. Scale.<br />Operate with confidence.</h1>
             <p>
               Fusisoft Technologies delivers modern IT engineering that accelerates delivery, increases reliability,
               and embeds security into every phase—without sacrificing quality.
             </p>
+            <ul class="hero-highlights">
+              <li><i class="fa-solid fa-bolt"></i> Release with confidence through automation + governance.</li>
+              <li><i class="fa-solid fa-eye"></i> Full-stack visibility from pipeline to production.</li>
+              <li><i class="fa-solid fa-shield-heart"></i> Security baked in, not bolted on.</li>
+            </ul>
 
             <div class="cta">
               <c:url var="contactUrl" value="/contact" />
@@ -37,14 +43,14 @@
           </header>
 
           <main class="grid">
-            <section class="card glass">
+            <section class="card glass" data-reveal>
               <h2><i class="fa-solid fa-layer-group"></i> Our Core Services</h2>
               <p>Explore the services we offer with a premium design system and consistent experience.</p>
 
               <div class="services">
                 <c:url var="devopsUrl" value="/devops" />
                 <c:url var="devopsImg" value="/images/devops.jpg" />
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-cover" style="background-image:url('${devopsImg}');"></div>
                   <div class="service-content">
                     <div class="service-pill"><i class="fa-solid fa-infinity"></i>&nbsp; Delivery • Automation</div>
@@ -58,7 +64,7 @@
 
                 <c:url var="sreUrl" value="/sre" />
                 <c:url var="sreImg" value="/images/sre.jpg" />
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-cover" style="background-image:url('${sreImg}');"></div>
                   <div class="service-content">
                     <div class="service-pill"><i class="fa-solid fa-heart-pulse"></i>&nbsp; Reliability</div>
@@ -72,7 +78,7 @@
 
                 <c:url var="devsecopsUrl" value="/devsecops" />
                 <c:url var="devsecopsImg" value="/images/devsecops.jpg" />
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-cover" style="background-image:url('${devsecopsImg}');"></div>
                   <div class="service-content">
                     <div class="service-pill"><i class="fa-solid fa-shield-halved"></i>&nbsp; Security • Compliance
@@ -87,7 +93,7 @@
 
                 <c:url var="iacUrl" value="/iac" />
                 <c:url var="iacImg" value="/images/iac.jpg" />
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-cover" style="background-image:url('${iacImg}');"></div>
                   <div class="service-content">
                     <div class="service-pill"><i class="fa-solid fa-code"></i>&nbsp; Terraform • Automation</div>
@@ -101,7 +107,7 @@
 
                 <c:url var="cyberUrl2" value="/cybersecurity" />
                 <c:url var="cyberImg" value="/images/cybersecurity.jpg" />
-                <div class="service-card" style="grid-column:1 / -1;">
+                <div class="service-card" style="grid-column:1 / -1;" data-reveal>
                   <div class="service-cover" style="background-image:url('${cyberImg}');"></div>
                   <div class="service-content">
                     <div class="service-pill"><i class="fa-solid fa-user-shield"></i>&nbsp; Threat • Defense</div>
@@ -115,7 +121,7 @@
               </div>
             </section>
 
-            <aside class="card glass">
+            <aside class="card glass" data-reveal>
               <h2><i class="fa-solid fa-star"></i> Why Fusisoft?</h2>
               <p>Modern engineering, measurable outcomes, and operational excellence.</p>
 
@@ -134,6 +140,28 @@
               </div>
             </aside>
           </main>
+
+          <section class="card glass" data-reveal style="margin-top:18px;">
+            <div class="card-header">
+              <h2><i class="fa-solid fa-stars"></i> The Fusisoft Magic</h2>
+              <span class="pill"><i class="fa-solid fa-sparkles"></i> Crafted Experiences</span>
+            </div>
+            <p>We blend strategy, automation, and empathy to create experiences that feel effortless for your teams.</p>
+            <div class="stat-grid">
+              <div class="stat">
+                <strong>2-4x</strong>
+                Release velocity with automated pipelines and quality gates.
+              </div>
+              <div class="stat">
+                <strong>99.95%</strong>
+                Availability targets supported by SRE workflows and runbooks.
+              </div>
+              <div class="stat">
+                <strong>Zero-Trust</strong>
+                Security posture guided by continuous verification.
+              </div>
+            </div>
+          </section>
 
           <%@ include file="fragments/footer.jspf" %>
       </div>

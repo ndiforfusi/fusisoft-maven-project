@@ -11,7 +11,8 @@
   <div class="container">
     <%@ include file="fragments/header.jspf" %>
 
-    <div class="card" style="padding:22px;">
+    <div class="card glass status-card" data-reveal>
+      <div class="status-icon success"><i class="fa-solid fa-check"></i></div>
       <h2>Thank You!</h2>
       <p style="color:rgba(255,255,255,.82); line-height:1.6;">
         Dear <strong><c:out value="${sessionScope.contactName}" default="Customer"/></strong>,

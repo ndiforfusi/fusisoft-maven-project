@@ -14,8 +14,9 @@
         <%@ include file="fragments/header.jspf" %>
 
           <c:url var="heroImg" value="/images/sre.jpg" />
-          <header class="hero glass">
+          <header class="hero glass" data-reveal>
             <div class="hero-bg" style="background-image:url('${heroImg}');"></div>
+            <div class="hero-badge"><i class="fa-solid fa-heart-pulse"></i> Calm, resilient operations</div>
             <h1>Site Reliability Engineering (SRE)</h1>
             <p>Reliability systems: SLOs, incident response, monitoring, and resilience improvements.</p>
             <div class="cta">
@@ -27,12 +28,12 @@
           </header>
 
           <main class="grid">
-            <section class="card">
+            <section class="card glass" data-reveal>
               <h2>What we deliver</h2>
               <p>Operational patterns that reduce downtime and improve customer experience.</p>
 
               <div class="services">
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">SLO</div>
                     <div class="service-title">Reliability Targets</div>
@@ -40,7 +41,7 @@
                   </div>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">On-call</div>
                     <div class="service-title">Incident Response</div>
@@ -48,7 +49,7 @@
                   </div>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">Signals</div>
                     <div class="service-title">Monitoring</div>
@@ -56,7 +57,7 @@
                   </div>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">Resilience</div>
                     <div class="service-title">Performance</div>
@@ -66,7 +67,7 @@
               </div>
             </section>
 
-            <aside class="card">
+            <aside class="card glass" data-reveal>
               <h2>Engagement options</h2>
               <p>Pick a model that fits your timeline and goals.</p>
 

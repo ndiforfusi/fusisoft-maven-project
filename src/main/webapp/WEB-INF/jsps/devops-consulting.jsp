@@ -14,8 +14,9 @@
         <%@ include file="fragments/header.jspf" %>
 
           <c:url var="heroImg" value="/images/devops.jpg" />
-          <header class="hero glass">
+          <header class="hero glass" data-reveal>
             <div class="hero-bg" style="background-image:url('${heroImg}');"></div>
+            <div class="hero-badge"><i class="fa-solid fa-gear"></i> Automation with elegance</div>
             <h1>DevOps Consulting</h1>
             <p>Optimize delivery with CI/CD automation, deployment safety, and observability.</p>
             <div class="cta">
@@ -27,12 +28,12 @@
           </header>
 
           <main class="grid">
-            <section class="card">
+            <section class="card glass" data-reveal>
               <h2>What we deliver</h2>
               <p>Implementation-ready pipelines, automation, and operational excellence.</p>
 
               <div class="services">
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">CI/CD</div>
                     <div class="service-title">Pipelines</div>
@@ -40,7 +41,7 @@
                   </div>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">Containers</div>
                     <div class="service-title">Kubernetes</div>
@@ -48,7 +49,7 @@
                   </div>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">Automation</div>
                     <div class="service-title">Infrastructure</div>
@@ -56,7 +57,7 @@
                   </div>
                 </div>
 
-                <div class="service-card">
+                <div class="service-card" data-reveal>
                   <div class="service-content">
                     <div class="service-pill">Visibility</div>
                     <div class="service-title">Observability</div>
@@ -66,7 +67,7 @@
               </div>
             </section>
 
-            <aside class="card">
+            <aside class="card glass" data-reveal>
               <h2>Engagement options</h2>
               <p>Pick a model that fits your timeline and goals.</p>
 

@@ -1,0 +1,47 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:url var="cssMain" value="/styles/main.css"/>
+<c:url var="jsMain" value="/js/main.js"/>
+
+<link rel="stylesheet" href="${cssMain}"/>
+<script defer src="${jsMain}"></script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<c:url var="homeUrl" value="/"/>
+<c:url var="contactUrl" value="/contact"/>
+<c:url var="devopsUrl" value="/devops"/>
+<c:url var="sreUrl" value="/sre"/>
+<c:url var="devsecopsUrl" value="/devsecops"/>
+<c:url var="iacUrl" value="/iac"/>
+<c:url var="cyberUrl" value="/cybersecurity"/>
+<c:url var="loginUrl" value="/login"/>
+
+<c:url var="logoMain" value="/images/Logo-principal.jpg"/>
+
+<div class="topbar">
+  <a class="brand" href="${homeUrl}">
+    <img src="${logoMain}" alt="Fusisoft Logo"/>
+    <span>
+      Fusisoft Technologies
+      <small>IT Consulting & Engineering</small>
+    </span>
+  </a>
+
+  <nav class="nav" aria-label="Primary navigation">
+    <a href="${homeUrl}"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="${devopsUrl}"><i class="fa-solid fa-infinity"></i> DevOps</a>
+    <a href="${sreUrl}"><i class="fa-solid fa-heart-pulse"></i> SRE</a>
+    <a href="${devsecopsUrl}"><i class="fa-solid fa-shield-halved"></i> DevSecOps</a>
+    <a href="${iacUrl}"><i class="fa-solid fa-code"></i> IaC</a>
+    <a href="${cyberUrl}"><i class="fa-solid fa-user-shield"></i> Cybersecurity</a>
+    <a href="${contactUrl}"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <a href="${loginUrl}"><i class="fa-solid fa-lock"></i> Admin</a>
+  </nav>
+</div>

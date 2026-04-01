@@ -1,0 +1,15 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url var="logoMain" value="/images/Logo-principal.jpg"/>
+<c:url var="logoAlt" value="/images/asasoft_logo.png"/>
+
+<div class="footer glass">
+  <div>
+    <div><strong>Fusisoft Technologies</strong> — Innovating IT Solutions for the Future</div>
+    <div style="margin-top:6px;">&copy; 2026 Fusisoft Technologies</div>
+  </div>
+
+  <div class="logos">
+    <img src="${logoMain}" alt="Fusisoft"/>
+    <img src="${logoAlt}" alt="Fusisoft Alternate"/>
+  </div>
+</div>
